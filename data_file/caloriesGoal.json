@@ -1,0 +1,52 @@
+[
+    {
+        "caloriesGoal": 10000,
+        "startDate": "2013-10-23",
+        "endDate": "2013-10-30"
+    },
+    {
+        "caloriesGoal": 20000,
+        "startDate": "2013-11-23",
+        "endDate": "2013-11-30"
+    },
+    {
+        "caloriesGoal": 30000,
+        "startDate": "2013-10-03",
+        "endDate": "2013-10-12"
+    },
+    {
+        "caloriesGoal": 15000,
+        "startDate": "2022-03-04",
+        "endDate": "2022-03-10"
+    },
+    {
+        "caloriesGoal": 10000,
+        "startDate": "2013-05-23",
+        "endDate": "2013-05-27"
+    },
+    {
+        "caloriesGoal": 20000,
+        "startDate": "2013-12-03",
+        "endDate": "2013-12-10"
+    },
+    {
+        "caloriesGoal": 30000,
+        "startDate": "2013-10-04",
+        "endDate": "2013-10-12"
+    },
+    {
+        "caloriesGoal": 15000,
+        "startDate": "2022-03-05",
+        "endDate": "2022-03-14"
+    },
+    {
+        "caloriesGoal": 30000,
+        "startDate": "2013-10-04",
+        "endDate": "2013-10-12"
+    },
+    {
+        "caloriesGoal": 15000,
+        "startDate": "2022-03-05",
+        "endDate": "2022-03-14"
+    }
+]

@@ -2,14 +2,13 @@ package com.exerisemgr.exercisemanager.model;
 
 import java.util.Date;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "goal")
 public abstract class Goal {
 
   @Id
   private Long id;
 
+  private Long userId;
   private Date startDate;
   private Date endDate;
 
@@ -28,6 +27,14 @@ public abstract class Goal {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public Long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Long userId) {
+    this.userId = userId;
   }
 
   public Date getStartDate() {
@@ -50,6 +57,7 @@ public abstract class Goal {
   public String toString() {
     return "Goal{" +
         "id=" + id +
+        ", userId=" + userId +
         ", startDate=" + startDate +
         ", endDate=" + endDate +
         '}';

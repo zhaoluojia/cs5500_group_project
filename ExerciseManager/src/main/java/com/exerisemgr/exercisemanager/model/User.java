@@ -1,5 +1,6 @@
 package com.exerisemgr.exercisemanager.model;
 
+import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -14,6 +15,9 @@ public class User {
   private String userName;
   private String password;
   private Double weight;
+  private DurationGoal durationGoal;
+  private CaloriesGoal caloriesGoal;
+  private List<Exercise> exerciseList;
 
   public User() {
   }
@@ -25,12 +29,12 @@ public class User {
     this.weight = weight;
   }
 
-  public Long getUserId() {
+  public Long getId() {
     return id;
   }
 
-  public void setUserId(Long userId) {
-    this.id = userId;
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getUserName() {
@@ -57,6 +61,30 @@ public class User {
     this.weight = weight;
   }
 
+  public DurationGoal getDurationGoal() {
+    return durationGoal;
+  }
+
+  public void setDurationGoal(DurationGoal durationGoal) {
+    this.durationGoal = durationGoal;
+  }
+
+  public CaloriesGoal getCaloriesGoal() {
+    return caloriesGoal;
+  }
+
+  public void setCaloriesGoal(CaloriesGoal caloriesGoal) {
+    this.caloriesGoal = caloriesGoal;
+  }
+
+  public List<Exercise> getExerciseList() {
+    return exerciseList;
+  }
+
+  public void setExerciseList(List<Exercise> exerciseList) {
+    this.exerciseList = exerciseList;
+  }
+
   @Override
   public String toString() {
     return "User{" +
@@ -64,6 +92,9 @@ public class User {
         ", userName='" + userName + '\'' +
         ", password='" + password + '\'' +
         ", weight=" + weight +
+        ", durationGoal=" + durationGoal +
+        ", caloriesGoal=" + caloriesGoal +
+        ", exerciseList=" + exerciseList +
         '}';
   }
 }

@@ -1,6 +1,9 @@
 package com.exerisemgr.exercisemanager.service;
 
 import com.exerisemgr.exercisemanager.exception.ResourceNotFoundException;
+import com.exerisemgr.exercisemanager.model.CaloriesGoal;
+import com.exerisemgr.exercisemanager.model.DurationGoal;
+import com.exerisemgr.exercisemanager.model.Exercise;
 import com.exerisemgr.exercisemanager.model.User;
 import com.exerisemgr.exercisemanager.repository.UserRepository;
 import java.util.List;
@@ -22,29 +25,12 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
-  public User updateUser(User user) {
-    Optional <User> userDb = this.userRepository.findById(user.getUserId());
-
-    if (userDb.isPresent()) {
-      User userUpdate = userDb.get();
-      userUpdate.setUserId(user.getUserId());
-      userUpdate.setUserName(user.getUserName());
-      userUpdate.setPassword(user.getPassword());
-      userUpdate.setWeight(user.getWeight());
-
-      return userUpdate;
-    } else {
-      throw new ResourceNotFoundException("Record not found with id: " + user.getUserId());
-    }
-  }
-
-  @Override
   public List<User> getAllUser() {
     return this.userRepository.findAll();
   }
 
   @Override
-  public User getUserById(Long userId) {
+  public User getUserByUserId(Long userId) {
     Optional <User> userDb = this.userRepository.findById(userId);
 
     if (userDb.isPresent()){
@@ -55,7 +41,99 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
-  public void deleteUser(long userId) {
+  public Double getWeightByUserId(Long userId) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      return userDb.get().getWeight();
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public DurationGoal getDurationGoalByUserId(Long userId) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      return userDb.get().getDurationGoal();
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public CaloriesGoal getCaloriesGoalByUserId(Long userId) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      return userDb.get().getCaloriesGoal();
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public List<Exercise> getAllExerciseByUserId(Long userId) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      return userDb.get().getExerciseList();
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public User updateWeight(Long userId, Double weight) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      userDb.get().setWeight(weight);
+      return userDb.get();
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public User updateDurationGoal(Long userId, DurationGoal durationGoal) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      userDb.get().setDurationGoal(durationGoal);
+      return userDb.get();
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public User updateCaloriesGoal(Long userId, CaloriesGoal caloriesGoal) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      userDb.get().setCaloriesGoal(caloriesGoal);
+      return userDb.get();
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public User addExercise(Long userId, Exercise exercise) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      userDb.get().getExerciseList().add(exercise);
+      return userDb.get();
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public void deleteUser(Long userId) {
     Optional <User> userDb = this.userRepository.findById(userId);
 
     if (userDb.isPresent()) {

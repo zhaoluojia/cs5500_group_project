@@ -1,5 +1,6 @@
 package com.exerisemgr.exercisemanager.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -27,6 +28,9 @@ public class User {
     this.userName = userName;
     this.password = password;
     this.weight = weight;
+    this.durationGoal = null;
+    this.caloriesGoal = null;
+    this.exerciseList = new ArrayList<>();
   }
 
   public Long getId() {
@@ -83,6 +87,10 @@ public class User {
 
   public void setExerciseList(List<Exercise> exerciseList) {
     this.exerciseList = exerciseList;
+  }
+
+  public void addExercise(Exercise exercise) {
+    this.exerciseList.add(exercise);
   }
 
   @Override

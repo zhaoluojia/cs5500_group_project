@@ -54,7 +54,7 @@ def main():
     userA["durationGoal"] = {
         "durationGoal": 20000, "startDate": "2013-11-23", "endDate": "2013-11-30"}
     userA["exerciseList"] = exercise_lst
-
+    userA = [userA]
     # print(userA["exerciseList"])
     # {'date': '20130210', 'exerciseName': 'walking', 'duration': 1670.0, 'calories': 59}
     # {'date': '20130211', 'exerciseName': 'walking', 'duration': 3552.0, 'calories': 203}

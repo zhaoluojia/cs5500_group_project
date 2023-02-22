@@ -2,6 +2,8 @@ package com.exerisemgr.exercisemanager.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -23,8 +25,8 @@ public class User {
   public User() {
   }
 
-  public User(Long id, String userName, String password, Double weight) {
-    this.id = id;
+  public User(String userName, String password, Double weight) {
+    this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     this.userName = userName;
     this.password = password;
     this.weight = weight;

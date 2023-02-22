@@ -47,4 +47,8 @@ public interface UserService {
 
   void deleteUser(Long userId);
 
+  void deleteDurationGoal(Long userId);
+
+  void deleteCaloriesGoal(Long userId);
+
 }

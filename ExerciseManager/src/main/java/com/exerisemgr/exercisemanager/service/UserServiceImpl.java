@@ -36,7 +36,13 @@ public class UserServiceImpl implements UserService{
 
   @Override
   public User createUser(User user) {
-    return userRepository.save(user);
+    Optional <User> userDb = this.userRepository.findByUserName(user.getUserName());
+
+    if (!userDb.isPresent()){
+      return userRepository.save(user);
+    } else {
+      throw new ResourceNotFoundException("Username exists.");
+    }
   }
 
   @Override

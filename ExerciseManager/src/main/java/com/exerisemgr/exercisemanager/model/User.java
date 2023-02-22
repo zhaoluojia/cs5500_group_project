@@ -2,11 +2,10 @@ package com.exerisemgr.exercisemanager.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.Indexed;
+import java.util.UUID;
 
 @Document(collection = "user")
 public class User {
@@ -98,13 +97,13 @@ public class User {
   @Override
   public String toString() {
     return "User{" +
-        "id=" + id +
-        ", userName='" + userName + '\'' +
-        ", password='" + password + '\'' +
-        ", weight=" + weight +
-        ", durationGoal=" + durationGoal +
-        ", caloriesGoal=" + caloriesGoal +
-        ", exerciseList=" + exerciseList +
-        '}';
+            "id=" + id +
+            ", userName='" + userName + '\'' +
+            ", password='" + password + '\'' +
+            ", weight=" + weight +
+            ", durationGoal=" + durationGoal +
+            ", caloriesGoal=" + caloriesGoal +
+            ", exerciseList=" + exerciseList +
+            '}';
   }
 }

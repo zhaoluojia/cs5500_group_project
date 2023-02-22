@@ -36,7 +36,13 @@ public class UserServiceImpl implements UserService{
 
   @Override
   public User createUser(User user) {
-    return userRepository.save(user);
+    Optional <User> userDb = this.userRepository.findByUserName(user.getUserName());
+
+    if (!userDb.isPresent()){
+      return userRepository.save(user);
+    } else {
+      throw new ResourceNotFoundException("Username exists.");
+    }
   }
 
   @Override
@@ -260,6 +266,28 @@ public class UserServiceImpl implements UserService{
 
     if (userDb.isPresent()) {
       this.userRepository.delete(userDb.get());
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public void deleteDurationGoal(Long userId) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()) {
+      userDb.get().setDurationGoal(null);
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public void deleteCaloriesGoal(Long userId) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()) {
+      userDb.get().setCaloriesGoal(null);
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
     }

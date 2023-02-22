@@ -2,14 +2,13 @@ package com.exerisemgr.exercisemanager.model;
 
 import java.util.Date;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "exercise")
 public class Exercise {
 
   @Id
   private Long id;
 
+  private Long userId;
   private String exerciseName;
   private Date date;
   private Double duration;
@@ -18,8 +17,10 @@ public class Exercise {
   public Exercise() {
   }
 
-  public Exercise(Long id, String exerciseName, Date date, Double duration, Double calories) {
+  public Exercise(Long id, Long userId, String exerciseName, Date date, Double duration,
+      Double calories) {
     this.id = id;
+    this.userId = userId;
     this.exerciseName = exerciseName;
     this.date = date;
     this.duration = duration;
@@ -32,6 +33,14 @@ public class Exercise {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public Long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Long userId) {
+    this.userId = userId;
   }
 
   public String getExerciseName() {
@@ -70,6 +79,7 @@ public class Exercise {
   public String toString() {
     return "Exercise{" +
         "id=" + id +
+        ", userId=" + userId +
         ", exerciseName='" + exerciseName + '\'' +
         ", date=" + date +
         ", duration=" + duration +

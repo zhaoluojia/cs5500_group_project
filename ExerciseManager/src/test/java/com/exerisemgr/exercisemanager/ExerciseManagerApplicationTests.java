@@ -1,5 +1,4 @@
 package com.exerisemgr.exercisemanager;
-
 import com.exerisemgr.exercisemanager.model.User;
 import com.exerisemgr.exercisemanager.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -22,4 +21,18 @@ class ExerciseManagerApplicationTests {
         Optional<User> userFromDB = userRepository.findByUserName("Jose");
         assertEquals(Optional.of(newUser).toString(), userFromDB.toString());
     }
+
+    @Test
+    public void testGetUser() {
+        User userFromDB = userRepository.findByUserName("Jose").orElse(null);
+        Long id = userFromDB.getId();
+        assertEquals(Optional.of(id), Optional.of(5805310040165204220L));
+    }
+
+    @Test
+    public void testDeleteUser() {
+        userRepository.deleteById(5805310040165204220L);
+        assertEquals(userRepository.findByUserName("Jose"), Optional.empty());
+    }
+
 }

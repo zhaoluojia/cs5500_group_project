@@ -265,4 +265,26 @@ public class UserServiceImpl implements UserService{
     }
   }
 
+  @Override
+  public void deleteDurationGoal(Long userId) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()) {
+      userDb.get().setDurationGoal(null);
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public void deleteCaloriesGoal(Long userId) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()) {
+      userDb.get().setCaloriesGoal(null);
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
 }

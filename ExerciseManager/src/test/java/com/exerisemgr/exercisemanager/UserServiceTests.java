@@ -34,10 +34,10 @@ public class UserServiceTests {
 
   private User user1;
   private User user2;
-
   @BeforeEach
   public void setup() throws ParseException {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
     user1 = new User("Alex", "password1", 88.3);
     user2 = new User("Steward", "password2", 60.2);
 
@@ -137,4 +137,6 @@ public class UserServiceTests {
     assertEquals(exercises.get(1).getExerciseName(), "walking");
     assertEquals(exercises.get(2).getExerciseName(), "cycling");
   }
+
+
 }

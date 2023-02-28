@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
-
   private static final Double WALKING_METS = 6.3;
   private static final Double CYCLING_METS = 8.0;
   private static final Double RUNNING_METS = 11.5;

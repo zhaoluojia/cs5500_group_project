@@ -22,4 +22,15 @@ class ExerciseManagerApplicationTests {
         Optional<User> userFromDB = userRepository.findByUserName("Jose");
         assertEquals(Optional.of(newUser).toString(), userFromDB.toString());
     }
+
+    @Test
+    public void testDependency() {
+        Integer num = 3;
+        assertEquals(Optional.of(num), Optional.of(3));
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println("try");
+    }
 }

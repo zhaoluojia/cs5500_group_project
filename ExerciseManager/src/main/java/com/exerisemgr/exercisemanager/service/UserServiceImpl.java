@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
   public User createUser(User user) {
     Optional <User> userDb = this.userRepository.findByUserName(user.getUserName());
 
-    if (!userDb.isPresent()){
+    if (userDb.isEmpty()){
       return userRepository.save(user);
     } else {
       throw new ResourceNotFoundException("Username exists.");
@@ -125,10 +125,9 @@ public class UserServiceImpl implements UserService{
       LocalDate start = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
       LocalDate end = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
       int days = Period.between(start, end).getDays();
-      for (long i = 0; i < days; i++) {
+      for (long i = 0; i <= days; i++) {
         dailyDurationSumMap.put(Date.from(start.plusDays(i).atStartOfDay(ZoneId.systemDefault()).toInstant()), 0.0);
       }
-
       List<Exercise> exerciseList = userDb.get().getExerciseList();
       for (Exercise e : exerciseList) {
         Date d = e.getDate();
@@ -151,7 +150,7 @@ public class UserServiceImpl implements UserService{
       LocalDate start = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
       LocalDate end = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
       int days = Period.between(start, end).getDays();
-      for (long i = 0; i < days; i++) {
+      for (long i = 0; i <= days; i++) {
         dailyCaloriesSumMap.put(Date.from(start.plusDays(i).atStartOfDay(ZoneId.systemDefault()).toInstant()), 0.0);
       }
 
@@ -204,6 +203,17 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
+  public void updatePassword(Long userId, String password) {
+    Optional <User> userDb = this.userRepository.findById(userId);
+
+    if (userDb.isPresent()){
+      userDb.get().setPassword(password);
+    } else {
+      throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
   public void updateDurationGoal(Long userId, Date startDate, Date endDate, Double durationGoal) {
     Optional <User> userDb = this.userRepository.findById(userId);
 
@@ -244,7 +254,7 @@ public class UserServiceImpl implements UserService{
   }
 
   private Double calculateCalories(Double weight, String exerciseName, Double duration) {
-    Double mets = 0.0;
+    double mets;
     switch (exerciseName) {
       case "walking":
         mets = WALKING_METS;

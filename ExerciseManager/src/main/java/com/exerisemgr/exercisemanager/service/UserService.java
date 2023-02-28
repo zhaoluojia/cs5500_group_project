@@ -39,6 +39,8 @@ public interface UserService {
 
   void updateWeight(Long userId, Double weight);
 
+  void updatePassword(Long userId, String password);
+
   void updateDurationGoal(Long userId, Date startDate, Date endDate, Double durationGoal);
 
   void updateCaloriesGoal(Long userId, Date startDate, Date endDate, Double caloriesGoal);

@@ -27,6 +27,16 @@ public class UserController {
     public ResponseEntity<List<User>> allUser(){
         return new ResponseEntity<List<User>>(userService.getAllUser(), HttpStatus.OK);
     }
+    /**
+     * Create the User.
+     * @param user: the user object including all information.
+     * @return: the User.
+     */
+    @RequestMapping(value="/", method = RequestMethod.POST)
+    public User createUser(@RequestBody User user) {
+        // TODO implementation.
+        return null;
+    }
 
     /**
      * Get the User by userId
@@ -40,13 +50,12 @@ public class UserController {
     }
 
     /**
-     * Get the User by userName and password.
-     * @param userName the username.
-     * @param password the password.
+     * Get the User by user information.
+     * @param user the user object.
      * @return User object
      */
-    @RequestMapping(value = "/{username}/{password}", method = RequestMethod.GET)
-    public User getUserByCredentials(@PathVariable String userName, @PathVariable String password) {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public User getUserByCredentials(@RequestBody User user) {
         // TODO implementation.
         return null;
     }
@@ -186,7 +195,7 @@ public class UserController {
     /**
      * Update weight for the user.
      * @param userId userId.
-     * @param weight the weight the user want to change to.
+     * @param weight the weight the user wants to change to.
      */
     @RequestMapping(value = "/{userId}/weight", method = RequestMethod.PUT)
     public void updateWeight(@PathVariable Long userId,
@@ -243,11 +252,12 @@ public class UserController {
      * @param duration the duration of the exercise.
      */
     @RequestMapping(value = "/{userId}/exerciseList", method = RequestMethod.POST)
-    public void createExercise(@PathVariable Long userId,
+    public Exercise createExercise(@PathVariable Long userId,
                                    @RequestParam String exerciseName,
                                    @RequestParam Date date,
                                    @RequestParam Double duration) {
         // TODO implementation.
+        return null;
     }
 
     /**
@@ -276,16 +286,6 @@ public class UserController {
     public void deleteCaloriesGoal(@PathVariable Long userId) {
         // TODO implementation.
     }
-
-
-
-
-
-
-
-
-
-
 }
 
 

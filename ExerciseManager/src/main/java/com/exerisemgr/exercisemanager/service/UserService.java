@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserService {
+
   User createUser(User user);
 
   List <User> getAllUser();

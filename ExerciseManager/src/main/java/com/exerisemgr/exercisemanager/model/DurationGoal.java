@@ -9,9 +9,9 @@ public class DurationGoal extends Goal {
   public DurationGoal() {
   }
 
-  public DurationGoal(Long id, Date startDate, Date endDate,
+  public DurationGoal(Long userId, Date startDate, Date endDate,
       Double durationGoal) {
-    super(id, startDate, endDate);
+    super(userId, startDate, endDate);
     this.durationGoal = durationGoal;
   }
 

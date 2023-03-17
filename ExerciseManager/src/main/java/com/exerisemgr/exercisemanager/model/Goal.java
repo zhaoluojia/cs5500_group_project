@@ -1,6 +1,7 @@
 package com.exerisemgr.exercisemanager.model;
 
 import java.util.Date;
+import java.util.UUID;
 import org.springframework.data.annotation.Id;
 
 public abstract class Goal {
@@ -15,8 +16,9 @@ public abstract class Goal {
   public Goal() {
   }
 
-  public Goal(Long id, Date startDate, Date endDate) {
-    this.id = id;
+  public Goal(Long userId, Date startDate, Date endDate) {
+    this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+    this.userId = userId;
     this.startDate = startDate;
     this.endDate = endDate;
   }

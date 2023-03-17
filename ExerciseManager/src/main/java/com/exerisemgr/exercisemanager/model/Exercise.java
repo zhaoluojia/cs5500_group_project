@@ -1,6 +1,7 @@
 package com.exerisemgr.exercisemanager.model;
 
 import java.util.Date;
+import java.util.UUID;
 import org.springframework.data.annotation.Id;
 
 public class Exercise {
@@ -17,9 +18,9 @@ public class Exercise {
   public Exercise() {
   }
 
-  public Exercise(Long id, Long userId, String exerciseName, Date date, Double duration,
+  public Exercise(Long userId, String exerciseName, Date date, Double duration,
       Double calories) {
-    this.id = id;
+    this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     this.userId = userId;
     this.exerciseName = exerciseName;
     this.date = date;

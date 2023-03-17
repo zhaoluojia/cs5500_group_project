@@ -9,9 +9,9 @@ public class CaloriesGoal extends Goal {
   public CaloriesGoal() {
   }
 
-  public CaloriesGoal(Long id, Date startDate, Date endDate,
+  public CaloriesGoal(Long userId, Date startDate, Date endDate,
       Double caloriesGoal) {
-    super(id, startDate, endDate);
+    super(userId, startDate, endDate);
     this.caloriesGoal = caloriesGoal;
   }
 

@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -40,8 +39,7 @@ public class UserController {
    */
   @RequestMapping(value="/{userId}", method = RequestMethod.GET)
   public User getUserById(@PathVariable Long userId) {
-    // TODO implementation.
-    return null;
+    return userService.getUserByUserId(userId);
   }
 
   /**
@@ -84,8 +82,7 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/caloriesGoal", method = RequestMethod.GET)
   public CaloriesGoal getCaloriesGoalByUserId(@PathVariable Long userId) {
-    // TODO implementation.
-    return null;
+    return userService.getCaloriesGoalByUserId(userId);
   }
 
   /**
@@ -95,8 +92,7 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/exercises", method = RequestMethod.GET)
   public List<Exercise> getAllExerciseByUserId(@PathVariable Long userId) {
-    // TODO implementation.
-    return null;
+    return userService.getAllExerciseByUserId(userId);
   }
 
   /**
@@ -107,10 +103,11 @@ public class UserController {
    * @return a Map mapping each day to its duration sum.
    */
   @RequestMapping(value = "/{userId}/dailyDurations", method = RequestMethod.GET)
-  public Map<Date, Double> getDailyDurationSumMap(@PathVariable Long userId, @RequestParam Date startDate,
-      @RequestParam Date endDate) {
-    // TODO implementation.
-    return null;
+  public Map<Date, Double> getDailyDurationSumMap(@PathVariable Long userId, @RequestParam("startDate")
+      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @RequestParam("endDate")
+      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+    return userService.getDailyDurationSumMap(userId, startDate, endDate);
   }
 
   /**
@@ -121,10 +118,11 @@ public class UserController {
    * @return a Map mapping each day to its calories sum.
    */
   @RequestMapping(value = "/{userId}/dailyCalories", method = RequestMethod.GET)
-  public Map<Date, Double> getDailyCaloriesSumMap(@PathVariable Long userId, @RequestParam Date startDate,
-      @RequestParam Date endDate) {
-    // TODO implementation.
-    return null;
+  public Map<Date, Double> getDailyCaloriesSumMap(@PathVariable Long userId, @RequestParam("startDate")
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @RequestParam("endDate")
+      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+    return userService.getDailyCaloriesSumMap(userId, startDate, endDate);
   }
 
   /**
@@ -135,11 +133,11 @@ public class UserController {
    * @return the total Duration between start date and end date.
    */
   @RequestMapping(value = "/{userId}/durationTotalBetweenDates", method = RequestMethod.GET)
-  public Double getDurationTotalBetweenDates(@PathVariable Long userId,
-      @RequestParam Date startDate,
-      @RequestParam Date endDate) {
-    // TODO implementation.
-    return null;
+  public Double getDurationTotalBetweenDates(@PathVariable Long userId, @RequestParam("startDate")
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @RequestParam("endDate")
+      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+    return userService.getDurationTotalBetweenDates(userId, startDate, endDate);
   }
 
   /**
@@ -150,11 +148,11 @@ public class UserController {
    * @return the total calories between start date and end date.
    */
   @RequestMapping(value = "/{userId}/caloriesTotalBetweenDates", method = RequestMethod.GET)
-  public Double getCaloriesTotalBetweenDates(@PathVariable Long userId,
-      @RequestParam Date startDate,
-      @RequestParam Date endDate) {
-    // TODO implementation.
-    return null;
+  public Double getCaloriesTotalBetweenDates(@PathVariable Long userId, @RequestParam("startDate")
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @RequestParam("endDate")
+      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+    return userService.getCaloriesTotalBetweenDates(userId, startDate, endDate);
   }
 
   /**

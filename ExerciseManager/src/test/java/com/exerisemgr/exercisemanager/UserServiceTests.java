@@ -74,15 +74,15 @@ public class UserServiceTests {
     user2.setCaloriesGoal(new CaloriesGoal(user2.getId(), startDate, endDate, 700.0));
 
     // create some exercises
-    Exercise e1 = new Exercise(121235612L, user2.getId(),
+    Exercise e1 = new Exercise(user2.getId(),
         "running", sdf.parse("2022-02-15"), 25.0,230.1);
-    Exercise e2 = new Exercise(121235613L, user2.getId(),
+    Exercise e2 = new Exercise(user2.getId(),
         "walking", sdf.parse("2022-02-17"), 250.0,1230.2);
-    Exercise e3 = new Exercise(121235614L, user2.getId(),
+    Exercise e3 = new Exercise(user2.getId(),
         "cycling", sdf.parse("2022-02-19"), 125.0,530.0);
-    Exercise e4 = new Exercise(121235614L, user2.getId(),
+    Exercise e4 = new Exercise(user2.getId(),
         "walking", sdf.parse("2022-02-19"), 250.0,730.0);
-    Exercise e5 = new Exercise(121235614L, user2.getId(),
+    Exercise e5 = new Exercise(user2.getId(),
         "kayaking", sdf.parse("2022-02-19"), 100.0,76.7);
 
     // insert some exercise for user2

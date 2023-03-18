@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -164,10 +165,9 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/smallestDurationBetweenDates", method = RequestMethod.GET)
   public Double getSmallestDurationBetweenDates(@PathVariable Long userId,
-      @RequestParam Date startDate,
-      @RequestParam Date endDate) {
-    // TODO implementation.
-    return null;
+      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+    return userService.getSmallestDurationBetweenDates(userId, startDate, endDate);
   }
 
   /**
@@ -179,10 +179,9 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/smallestCaloriesBetweenDates", method = RequestMethod.GET)
   public Double getSmallestCaloriesBetweenDates(@PathVariable Long userId,
-      @RequestParam Date startDate,
-      @RequestParam Date endDate) {
-    // TODO implementation.
-    return null;
+      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+    return userService.getSmallestCaloriesBetweenDates(userId, startDate, endDate);
   }
 
   /**
@@ -191,9 +190,10 @@ public class UserController {
    * @param weight the weight the user wants to change to.
    */
   @RequestMapping(value = "/{userId}/weight", method = RequestMethod.PUT)
-  public void updateWeight(@PathVariable Long userId,
+  public ResponseEntity<String> updateWeight(@PathVariable Long userId,
       @RequestParam Double weight) {
-    // TODO implementation.
+    userService.updateWeight(userId, weight);
+    return ResponseEntity.ok("Weight updated successfully");
   }
 
   /**
@@ -202,9 +202,10 @@ public class UserController {
    * @param password the password the user want to change to.
    */
   @RequestMapping(value = "/{userId}/{password}", method = RequestMethod.PUT)
-  public void updatePassword(@PathVariable Long userId,
+  public ResponseEntity<String> updatePassword(@PathVariable Long userId,
       @PathVariable String password) {
-    // TODO implementation.
+    userService.updatePassword(userId, password);
+    return ResponseEntity.ok("Password updated successfully");
   }
 
   /**
@@ -215,11 +216,12 @@ public class UserController {
    * @param durationGoal the duration goal the user want to change to.
    */
   @RequestMapping(value = "/{userId}/durationalGoal", method = RequestMethod.PUT)
-  public void updateDurationGoal(@PathVariable Long userId,
-      @RequestParam Double startDate,
-      @RequestParam Double endDate,
+  public ResponseEntity<String> updateDurationGoal(@PathVariable Long userId,
+      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
       @RequestParam Double durationGoal) {
-    // TODO implementation.
+    userService.updateDurationGoal(userId, startDate, endDate, durationGoal);
+    return ResponseEntity.ok("Duration goal updated successfully");
   }
 
   /**
@@ -231,8 +233,8 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/caloriesGoal", method = RequestMethod.PUT)
   public void updateCaloriesGoal(@PathVariable Long userId,
-      @RequestParam Double startDate,
-      @RequestParam Double endDate,
+      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
       @RequestParam Double caloriesGoal) {
     // TODO implementation.
   }

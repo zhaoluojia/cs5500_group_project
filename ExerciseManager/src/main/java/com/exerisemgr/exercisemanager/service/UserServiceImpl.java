@@ -197,6 +197,7 @@ public class UserServiceImpl implements UserService{
 
     if (userDb.isPresent()){
       userDb.get().setWeight(weight);
+      this.userRepository.save(userDb.get());
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
     }
@@ -208,6 +209,7 @@ public class UserServiceImpl implements UserService{
 
     if (userDb.isPresent()){
       userDb.get().setPassword(password);
+      this.userRepository.save(userDb.get());
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
     }
@@ -221,6 +223,7 @@ public class UserServiceImpl implements UserService{
       Long uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
       DurationGoal d = new DurationGoal(uuid, startDate, endDate, durationGoal);
       userDb.get().setDurationGoal(d);
+      this.userRepository.save(userDb.get());
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
     }

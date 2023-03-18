@@ -48,6 +48,7 @@ class ExerciseManagerApplicationTests {
             "walking", sdf.parse("2022-02-19"), 250.0,730.0);
         Exercise e5 = new Exercise(newUser.getId(),
             "kayaking", sdf.parse("2022-02-19"), 100.0,76.7);
+
         newUser.getExerciseList().add(e1);
         newUser.getExerciseList().add(e2);
         newUser.getExerciseList().add(e3);

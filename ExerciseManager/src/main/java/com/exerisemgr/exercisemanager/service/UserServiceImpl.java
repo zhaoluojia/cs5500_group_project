@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService{
       LocalDate start = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
       LocalDate end = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
       int days = Period.between(start, end).getDays();
-      for (long i = 1; i <= days + 1; i++) {
+      for (long i = 0; i <= days; i++) {
         dailyDurationSumMap.put(Date.from(start.plusDays(i).atStartOfDay(ZoneId.systemDefault()).toInstant()), 0.0);
       }
       List<Exercise> exerciseList = userDb.get().getExerciseList();
@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService{
       LocalDate start = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
       LocalDate end = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
       int days = Period.between(start, end).getDays();
-      for (long i = 1; i <= days + 1; i++) {
+      for (long i = 0; i <= days; i++) {
         dailyCaloriesSumMap.put(Date.from(start.plusDays(i).atStartOfDay(ZoneId.systemDefault()).toInstant()), 0.0);
       }
 

@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,8 +62,7 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/weight", method = RequestMethod.GET)
   public Double getWeightByUserId(@PathVariable Long userId) {
-    // TODO implementation.
-    return null;
+    return userService.getWeightByUserId(userId);
   }
 
   /**
@@ -105,9 +105,9 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/dailyDurations", method = RequestMethod.GET)
   public Map<Date, Double> getDailyDurationSumMap(@PathVariable Long userId, @RequestParam("startDate")
-      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+      @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
       @RequestParam("endDate")
-      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+      @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getDailyDurationSumMap(userId, startDate, endDate);
   }
 
@@ -120,9 +120,9 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/dailyCalories", method = RequestMethod.GET)
   public Map<Date, Double> getDailyCaloriesSumMap(@PathVariable Long userId, @RequestParam("startDate")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+  @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
       @RequestParam("endDate")
-      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+      @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getDailyCaloriesSumMap(userId, startDate, endDate);
   }
 
@@ -135,9 +135,9 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/durationTotalBetweenDates", method = RequestMethod.GET)
   public Double getDurationTotalBetweenDates(@PathVariable Long userId, @RequestParam("startDate")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+  @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
       @RequestParam("endDate")
-      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+      @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getDurationTotalBetweenDates(userId, startDate, endDate);
   }
 
@@ -150,9 +150,9 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/caloriesTotalBetweenDates", method = RequestMethod.GET)
   public Double getCaloriesTotalBetweenDates(@PathVariable Long userId, @RequestParam("startDate")
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+  @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
       @RequestParam("endDate")
-      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+      @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getCaloriesTotalBetweenDates(userId, startDate, endDate);
   }
 
@@ -165,8 +165,8 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/smallestDurationBetweenDates", method = RequestMethod.GET)
   public Double getSmallestDurationBetweenDates(@PathVariable Long userId,
-      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getSmallestDurationBetweenDates(userId, startDate, endDate);
   }
 
@@ -179,8 +179,8 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/smallestCaloriesBetweenDates", method = RequestMethod.GET)
   public Double getSmallestCaloriesBetweenDates(@PathVariable Long userId,
-      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getSmallestCaloriesBetweenDates(userId, startDate, endDate);
   }
 
@@ -217,8 +217,8 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/durationGoal", method = RequestMethod.PUT)
   public ResponseEntity<String> updateDurationGoal(@PathVariable Long userId,
-      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
+      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
       @RequestParam Double durationGoal) {
     userService.updateDurationGoal(userId, startDate, endDate, durationGoal);
     return ResponseEntity.ok("Duration goal updated successfully");
@@ -233,8 +233,8 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/caloriesGoal", method = RequestMethod.PUT)
   public ResponseEntity<String> updateCaloriesGoal(@PathVariable Long userId,
-      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
+      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
       @RequestParam Double caloriesGoal) {
     userService.updateCaloriesGoal(userId, startDate, endDate, caloriesGoal);
     return ResponseEntity.ok("Calories goal updated successfully");
@@ -250,7 +250,7 @@ public class UserController {
   @RequestMapping(value = "/{userId}/exerciseList", method = RequestMethod.POST)
   public ResponseEntity<String> createExercise(@PathVariable Long userId,
       @RequestParam String exerciseName,
-      @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
+      @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
       @RequestParam Double duration) {
     userService.addExercise(userId, exerciseName, date, duration);
 

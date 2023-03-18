@@ -215,10 +215,10 @@ public class UserController {
    * @param endDate the ending date of the duration goal.
    * @param durationGoal the duration goal the user want to change to.
    */
-  @RequestMapping(value = "/{userId}/durationalGoal", method = RequestMethod.PUT)
+  @RequestMapping(value = "/{userId}/durationGoal", method = RequestMethod.PUT)
   public ResponseEntity<String> updateDurationGoal(@PathVariable Long userId,
       @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
+      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
       @RequestParam Double durationGoal) {
     userService.updateDurationGoal(userId, startDate, endDate, durationGoal);
     return ResponseEntity.ok("Duration goal updated successfully");
@@ -232,11 +232,12 @@ public class UserController {
    * @param caloriesGoal the calories goal the user want to change to.
    */
   @RequestMapping(value = "/{userId}/caloriesGoal", method = RequestMethod.PUT)
-  public void updateCaloriesGoal(@PathVariable Long userId,
+  public ResponseEntity<String> updateCaloriesGoal(@PathVariable Long userId,
       @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-      @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
+      @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
       @RequestParam Double caloriesGoal) {
-    // TODO implementation.
+    userService.updateCaloriesGoal(userId, startDate, endDate, caloriesGoal);
+    return ResponseEntity.ok("Calories goal updated successfully");
   }
 
   /**
@@ -247,12 +248,13 @@ public class UserController {
    * @param duration the duration of the exercise.
    */
   @RequestMapping(value = "/{userId}/exerciseList", method = RequestMethod.POST)
-  public Exercise createExercise(@PathVariable Long userId,
+  public ResponseEntity<String> createExercise(@PathVariable Long userId,
       @RequestParam String exerciseName,
-      @RequestParam Date date,
+      @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
       @RequestParam Double duration) {
-    // TODO implementation.
-    return null;
+    userService.addExercise(userId, exerciseName, date, duration);
+
+    return ResponseEntity.ok("Exercise added successfully");
   }
 
   /**
@@ -260,17 +262,19 @@ public class UserController {
    * @param userId userId.
    */
   @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
-  public void deleteUser(@PathVariable Long userId) {
-    // TODO implementation.
+  public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
+    userService.deleteUser(userId);
+    return ResponseEntity.ok("User deleted successfully");
   }
 
   /**
    * Delete the duration goal for the user.
    * @param userId userId.
    */
-  @RequestMapping(value = "/{userId}/durationGoal", method = RequestMethod.DELETE)
-  public void deleteDurationGoal(@PathVariable Long userId) {
-    // TODO implementation.
+  @RequestMapping(value = "/{userId}/durationGoal", method = {RequestMethod.DELETE})
+  public ResponseEntity<String> deleteDurationGoal(@PathVariable Long userId) {
+    userService.deleteDurationGoal(userId);
+    return ResponseEntity.ok("DurationGoal deleted successfully");
   }
 
   /**
@@ -278,7 +282,8 @@ public class UserController {
    * @param userId userId.
    */
   @RequestMapping(value = "/{userId}/caloriesGoal", method = RequestMethod.DELETE)
-  public void deleteCaloriesGoal(@PathVariable Long userId) {
-    // TODO implementation.
+  public ResponseEntity<String> deleteCaloriesGoal(@PathVariable Long userId) {
+    userService.deleteCaloriesGoal(userId);
+    return ResponseEntity.ok("CaloriesGoal deleted successfully");
   }
 }

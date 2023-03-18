@@ -75,15 +75,15 @@ public class UserServiceTests {
 
     // create some exercises
     Exercise e1 = new Exercise(user2.getId(),
-        "running", sdf.parse("2022-02-15"), 25.0,230.1);
+            "running", sdf.parse("2022-02-15"), 25.0,230.1);
     Exercise e2 = new Exercise(user2.getId(),
-        "walking", sdf.parse("2022-02-17"), 250.0,1230.2);
+            "walking", sdf.parse("2022-02-17"), 250.0,1230.2);
     Exercise e3 = new Exercise(user2.getId(),
-        "cycling", sdf.parse("2022-02-19"), 125.0,530.0);
+            "cycling", sdf.parse("2022-02-19"), 125.0,530.0);
     Exercise e4 = new Exercise(user2.getId(),
-        "walking", sdf.parse("2022-02-19"), 250.0,730.0);
+            "walking", sdf.parse("2022-02-19"), 250.0,730.0);
     Exercise e5 = new Exercise(user2.getId(),
-        "kayaking", sdf.parse("2022-02-19"), 100.0,76.7);
+            "kayaking", sdf.parse("2022-02-19"), 100.0,76.7);
 
     // insert some exercise for user2
     user2.getExerciseList().add(e1);
@@ -410,9 +410,9 @@ public class UserServiceTests {
   public void testUpdateWeightException(){
     System.out.println("--------Test Update Weight Exception--------");
     ResourceNotFoundException thrown = Assertions.assertThrows
-        (ResourceNotFoundException.class, () -> {
-              userService.updateWeight(8905779767761850010L, 100.0); },
-            "Record not found with id: 8905779767761850010");
+            (ResourceNotFoundException.class, () -> {
+                      userService.updateWeight(8905779767761850010L, 100.0); },
+                    "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
 
@@ -420,9 +420,9 @@ public class UserServiceTests {
   public void testUpdatePasswordException(){
     System.out.println("--------Test Update Password Exception--------");
     ResourceNotFoundException thrown = Assertions.assertThrows
-        (ResourceNotFoundException.class, () -> {
-              userService.updatePassword(8905779767761850010L, "password000"); },
-            "Record not found with id: 8905779767761850010");
+            (ResourceNotFoundException.class, () -> {
+                      userService.updatePassword(8905779767761850010L, "password000"); },
+                    "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
 
@@ -430,9 +430,9 @@ public class UserServiceTests {
   public void testUpdateDurationGoalException(){
     System.out.println("--------Test Update Duration Goal Exception--------");
     ResourceNotFoundException thrown = Assertions.assertThrows
-        (ResourceNotFoundException.class, () -> {
-              userService.updateDurationGoal(8905779767761850010L, startDate, endDate, 1000.0); },
-            "Record not found with id: 8905779767761850010");
+            (ResourceNotFoundException.class, () -> {
+                      userService.updateDurationGoal(8905779767761850010L, startDate, endDate, 1000.0); },
+                    "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
 
@@ -440,9 +440,9 @@ public class UserServiceTests {
   public void testUpdateCaloriesGoalException(){
     System.out.println("--------Test Update Calories Goal Exception--------");
     ResourceNotFoundException thrown = Assertions.assertThrows
-        (ResourceNotFoundException.class, () -> {
-              userService.updateCaloriesGoal(8905779767761850010L, startDate, endDate, 300.0); },
-            "Record not found with id: 8905779767761850010");
+            (ResourceNotFoundException.class, () -> {
+                      userService.updateCaloriesGoal(8905779767761850010L, startDate, endDate, 300.0); },
+                    "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
 
@@ -450,9 +450,9 @@ public class UserServiceTests {
   public void testAddExerciseException(){
     System.out.println("--------Test Update Add Exercise Exception--------");
     ResourceNotFoundException thrown = Assertions.assertThrows
-        (ResourceNotFoundException.class, () -> {
-              userService.addExercise(8905779767761850010L, "running", date, 3000.0); },
-            "Record not found with id: 8905779767761850010");
+            (ResourceNotFoundException.class, () -> {
+                      userService.addExercise(8905779767761850010L, "running", date, 3000.0); },
+                    "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
 
@@ -460,9 +460,9 @@ public class UserServiceTests {
   public void testDeleteUserException(){
     System.out.println("--------Test Delete User Exception--------");
     ResourceNotFoundException thrown = Assertions.assertThrows
-        (ResourceNotFoundException.class, () -> {
-              userService.deleteUser(8905779767761850010L); },
-            "Record not found with id: 8905779767761850010");
+            (ResourceNotFoundException.class, () -> {
+                      userService.deleteUser(8905779767761850010L); },
+                    "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
 
@@ -470,9 +470,9 @@ public class UserServiceTests {
   public void testDeleteDurationGoalException(){
     System.out.println("--------Test Delete Duration Goal Exception--------");
     ResourceNotFoundException thrown = Assertions.assertThrows
-        (ResourceNotFoundException.class, () -> {
-              userService.deleteDurationGoal(8905779767761850010L); },
-            "Record not found with id: 8905779767761850010");
+            (ResourceNotFoundException.class, () -> {
+                      userService.deleteDurationGoal(8905779767761850010L); },
+                    "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
 
@@ -480,9 +480,9 @@ public class UserServiceTests {
   public void testDeleteCaloriesGoalException(){
     System.out.println("--------Test Delete Calories Goal Exception--------");
     ResourceNotFoundException thrown = Assertions.assertThrows
-        (ResourceNotFoundException.class, () -> {
-              userService.deleteCaloriesGoal(8905779767761850010L); },
-            "Record not found with id: 8905779767761850010");
+            (ResourceNotFoundException.class, () -> {
+                      userService.deleteCaloriesGoal(8905779767761850010L); },
+                    "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
 }

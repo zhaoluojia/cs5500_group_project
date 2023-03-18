@@ -237,6 +237,7 @@ public class UserServiceImpl implements UserService{
       Long uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
       CaloriesGoal c = new CaloriesGoal(uuid, startDate, endDate, caloriesGoal);
       userDb.get().setCaloriesGoal(c);
+      this.userRepository.save(userDb.get());
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
     }
@@ -251,6 +252,7 @@ public class UserServiceImpl implements UserService{
       Long uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
       Exercise e = new Exercise(userId, exerciseName, date, duration, calories);
       userDb.get().getExerciseList().add(e);
+      this.userRepository.save(userDb.get());
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
     }
@@ -290,6 +292,7 @@ public class UserServiceImpl implements UserService{
 
     if (userDb.isPresent()) {
       userDb.get().setDurationGoal(null);
+      this.userRepository.save(userDb.get());
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
     }
@@ -301,6 +304,7 @@ public class UserServiceImpl implements UserService{
 
     if (userDb.isPresent()) {
       userDb.get().setCaloriesGoal(null);
+      this.userRepository.save(userDb.get());
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
     }

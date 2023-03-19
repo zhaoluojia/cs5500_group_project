@@ -12,7 +12,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +25,32 @@ public class UserController {
 
   /**
    * Create the User.
-   * @param user: the user object including all information.
    * @return: the User.
    */
   @RequestMapping(value="/register", method = RequestMethod.POST)
-  public User createUser(@RequestBody User user) {
-    // TODO implementation.
-    return null;
+  public String createUser(@RequestParam String userName,@RequestParam String password, @RequestParam Double weight) {
+    User user = new User(userName, password, weight);
+    userService.createUser(user);
+    return "success";
+  }
+
+  /**
+   * Get the User by user information.
+   * @param user the user object.
+   * @return User object
+   */
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public User getUserByCredentials(@RequestBody User user) {
+    return userService.getUserByCredentials(user.getUserName(), user.getPassword());
+  }
+
+  /**
+   * Get All the Users by user information.
+   * @return All the Users
+   */
+  @RequestMapping(value = "/allUsers", method = RequestMethod.GET)
+  public ResponseEntity<List<User>> getAllUser(){
+    return new ResponseEntity<List<User>>(userService.getAllUser(), HttpStatus.OK);
   }
 
   /**
@@ -42,17 +61,6 @@ public class UserController {
   @RequestMapping(value="/{userId}", method = RequestMethod.GET)
   public User getUserById(@PathVariable Long userId) {
     return userService.getUserByUserId(userId);
-  }
-
-  /**
-   * Get the User by user information.
-   * @param user the user object.
-   * @return User object
-   */
-  @RequestMapping(value = "/login", method = RequestMethod.GET)
-  public User getUserByCredentials(@RequestBody User user) {
-    // TODO implementation.
-    return null;
   }
 
   /**
@@ -72,8 +80,7 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/durationGoal", method = RequestMethod.GET)
   public DurationGoal getDurationGoalByUserId(@PathVariable Long userId) {
-    // TODO implementation.
-    return null;
+    return userService.getDurationGoalByUserId(userId);
   }
 
   /**

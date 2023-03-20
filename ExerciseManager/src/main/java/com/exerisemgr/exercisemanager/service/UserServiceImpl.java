@@ -263,14 +263,19 @@ public class UserServiceImpl implements UserService{
     switch (exerciseName) {
       case "walking":
         mets = WALKING_METS;
+        break;
       case "running":
         mets = RUNNING_METS;
+        break;
       case "cycling":
         mets = CYCLING_METS;
+        break;
       case "kayaking":
         mets = KAYAKING_METS;
+        break;
       default:
         mets = 0.0;
+        break;
     }
     return mets * METS_CONST_1 * weight / METS_CONST_2 * duration;
   }

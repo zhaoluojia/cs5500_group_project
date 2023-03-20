@@ -36,8 +36,8 @@ public class UserController {
 
   /**
    * Get the User by user information.
-   * @param username: the userName
-   * @param password: the password
+   * @param username the userName.
+   * @param password the password.
    * @return User object
    */
   @RequestMapping(value = "/login", method = RequestMethod.GET)

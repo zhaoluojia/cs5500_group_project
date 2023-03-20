@@ -1,7 +1,6 @@
 import json
 from datetime import datetime
 
-
 def main():
     f = open('storyline.json')
     # return json object as dictionary

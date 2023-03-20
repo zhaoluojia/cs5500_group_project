@@ -36,12 +36,13 @@ public class UserController {
 
   /**
    * Get the User by user information.
-   * @param user the user object.
+   * @param username: the userName
+   * @param password: the password
    * @return User object
    */
   @RequestMapping(value = "/login", method = RequestMethod.GET)
-  public User getUserByCredentials(@RequestBody User user) {
-    return userService.getUserByCredentials(user.getUserName(), user.getPassword());
+  public User getUserByCredentials(@RequestParam("username") String username, @RequestParam("password") String password) {
+    return userService.getUserByCredentials(username, password);
   }
 
   /**

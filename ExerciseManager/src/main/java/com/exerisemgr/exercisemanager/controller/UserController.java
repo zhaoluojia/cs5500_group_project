@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -65,6 +66,16 @@ public class UserController {
   }
 
   /**
+   * Get the User by userName
+   * @param userName: the userName.
+   * @return: the User.
+   */
+  @RequestMapping(value="/{userName}/userName", method = RequestMethod.GET)
+  public User getUserByUserName(@PathVariable String userName) {
+    return userService.getUserByUserName(userName);
+  }
+
+  /**
    * Get the weight of the user by userId.
    * @param userId userId.
    * @return user's weight.
@@ -102,6 +113,16 @@ public class UserController {
   @RequestMapping(value = "/{userId}/exercises", method = RequestMethod.GET)
   public List<Exercise> getAllExerciseByUserId(@PathVariable Long userId) {
     return userService.getAllExerciseByUserId(userId);
+  }
+
+  /**
+   * Get a list of all Exercise objects of the user by userName
+   * @param userName userName.
+   * @return a list of Exercise objects.
+   */
+  @RequestMapping(value = "/{userName}/exercisesByUserName", method = RequestMethod.GET)
+  public List<Exercise> getAllExerciseByUserName(@PathVariable String userName) {
+    return userService.getAllExerciseByUserName(userName);
   }
 
   /**

@@ -62,6 +62,17 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
+  public User getUserByUserName(String userName) {
+    Optional <User> userDb = this.userRepository.findByUserName(userName);
+
+    if (userDb.isPresent()){
+      return userDb.get();
+    } else {
+      throw new ResourceNotFoundException("Record not found with userName: " + userName);
+    }
+  }
+
+  @Override
   public User getUserByCredentials(String userName, String password) {
     Optional <User> userDb = this.userRepository.findByUserName(userName);
 
@@ -113,6 +124,17 @@ public class UserServiceImpl implements UserService{
       return userDb.get().getExerciseList();
     } else {
       throw new ResourceNotFoundException("Record not found with id: " + userId);
+    }
+  }
+
+  @Override
+  public List<Exercise> getAllExerciseByUserName(String userName) {
+    Optional <User> userDb = this.userRepository.findByUserName(userName);
+
+    if (userDb.isPresent()){
+      return userDb.get().getExerciseList();
+    } else {
+      throw new ResourceNotFoundException("Record not found with userName: " + userName);
     }
   }
 

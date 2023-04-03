@@ -7,6 +7,7 @@ import HomeComponent from './components/HomeComponent';
 import PageOneComponent from "./components/PageOneComponent";
 import PageTwoComponent from "./components/PageTwoComponent";
 import PageThreeComponent from "./components/PageThreeComponent";
+import TestComponent from "./components/TestComponent";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/page_one" element={<PageOneComponent/>}/>
           <Route path="/page_two" element={<PageTwoComponent/>}/>
           <Route path="/page_three" element={<PageThreeComponent/>}/>
+          <Route path="/test" element={<TestComponent/>}/>
         </Routes>
       </BrowserRouter>
     </div>

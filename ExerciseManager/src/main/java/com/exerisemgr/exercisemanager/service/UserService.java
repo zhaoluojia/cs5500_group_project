@@ -16,6 +16,8 @@ public interface UserService {
 
   User getUserByUserId(Long userId);
 
+  User getUserByUserName(String userName);
+
   User getUserByCredentials(String userName, String password);
 
   Double getWeightByUserId(Long userId);
@@ -25,6 +27,8 @@ public interface UserService {
   CaloriesGoal getCaloriesGoalByUserId(Long userId);
 
   List<Exercise> getAllExerciseByUserId(Long userId);
+
+  List<Exercise> getAllExerciseByUserName(String userName);
 
   Map<Date, Double> getDailyDurationSumMap(Long userId, Date startDate, Date endDate);
 

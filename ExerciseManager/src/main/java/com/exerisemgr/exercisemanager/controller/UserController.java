@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -73,6 +72,16 @@ public class UserController {
   @RequestMapping(value="/{userName}/userName", method = RequestMethod.GET)
   public User getUserByUserName(@PathVariable String userName) {
     return userService.getUserByUserName(userName);
+  }
+
+  /**
+   * Get the UserId by userName
+   * @param userName: the userName.
+   * @return: the UserId.
+   */
+  @RequestMapping(value="/{userName}/userId", method = RequestMethod.GET)
+  public Long getUserIdByUserName(@PathVariable String userName) {
+    return userService.getUserIdByUserName(userName);
   }
 
   /**
@@ -248,7 +257,7 @@ public class UserController {
   public ResponseEntity<String> updateDurationGoal(@PathVariable Long userId,
       @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
       @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-      @RequestParam Double durationGoal) {
+      @RequestParam("durationGoal") Double durationGoal) {
     userService.updateDurationGoal(userId, startDate, endDate, durationGoal);
     return ResponseEntity.ok("Duration goal updated successfully");
   }
@@ -264,7 +273,7 @@ public class UserController {
   public ResponseEntity<String> updateCaloriesGoal(@PathVariable Long userId,
       @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
       @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-      @RequestParam Double caloriesGoal) {
+      @RequestParam("caloriesGoal") Double caloriesGoal) {
     userService.updateCaloriesGoal(userId, startDate, endDate, caloriesGoal);
     return ResponseEntity.ok("Calories goal updated successfully");
   }

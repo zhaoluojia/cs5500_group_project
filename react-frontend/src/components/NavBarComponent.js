@@ -18,15 +18,11 @@ const NavBarComponent = () => {
                 </li>
                 <li className="nav-item">
                   <a className={`nav-link ${active === 'page_two' ? 'active'
-                      : ''}`} href="page_two">Page 2</a>
+                      : ''}`} href="page_two">Set Goal</a>
                 </li>
                 <li className="nav-item">
                   <a className={`nav-link ${active === 'page_three' ? 'active'
                       : ''}`} href="page_three">Page 3</a>
-                </li>
-                <li className="nav-item">
-                  <a className={`nav-link ${active === 'test' ? 'active'
-                      : ''}`} href="test">Test</a>
                 </li>
               </ul>
             </div>

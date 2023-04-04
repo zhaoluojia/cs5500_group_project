@@ -18,6 +18,8 @@ public interface UserService {
 
   User getUserByUserName(String userName);
 
+  Long getUserIdByUserName(String userName);
+
   User getUserByCredentials(String userName, String password);
 
   Double getWeightByUserId(Long userId);

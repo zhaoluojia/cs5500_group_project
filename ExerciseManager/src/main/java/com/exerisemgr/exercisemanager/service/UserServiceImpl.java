@@ -73,6 +73,17 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
+  public Long getUserIdByUserName(String userName) {
+    Optional <User> userDb = this.userRepository.findByUserName(userName);
+
+    if (userDb.isPresent()){
+      return userDb.get().getId();
+    } else {
+      throw new ResourceNotFoundException("Record not found with userName: " + userName);
+    }
+  }
+
+  @Override
   public User getUserByCredentials(String userName, String password) {
     Optional <User> userDb = this.userRepository.findByUserName(userName);
 

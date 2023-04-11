@@ -9,13 +9,9 @@ import com.exerisemgr.exercisemanager.repository.UserRepository;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -236,27 +232,36 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
-  public Date getSmallestCaloriesDateBetweenDates(Long userId, Date startDate, Date endDate) {
+  public List<Date> getUnderAveragedCaloriesDateBetweenDates(Long userId, Double caloriesGoal, Date startDate, Date endDate) {
+    List<Date> returnVal = new ArrayList<>();
+    long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1;
+    Double averC = caloriesGoal / diff;
+    System.out.println(averC);
+    System.out.println(diff + "averC: " + averC);
     Map<Date, Double> dailyCaloriesSumMap = getDailyCaloriesSumMap(userId, startDate, endDate);
-    Double minValue = Collections.min(dailyCaloriesSumMap.values());
     for (Map.Entry<Date, Double> entry : dailyCaloriesSumMap.entrySet()) {
-      if (entry.getValue().equals(minValue)) {
-        return entry.getKey();
+      if (entry.getValue() < averC) {
+        returnVal.add(entry.getKey());
       }
     }
-    return null;
+    return returnVal;
   }
 
   @Override
-  public Date getSmallestDurationDateBetweenDates(Long userId, Date startDate, Date endDate) {
+  public List<Date> getUnderAveragedDurationDateBetweenDates(Long userId, Double durationGoal, Date startDate, Date endDate) {
+    List<Date> returnVal = new ArrayList<>();
+    long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1;
+    Double averD = durationGoal / diff;
+    System.out.println(diff + "averD: " + averD);
     Map<Date, Double> dailyDurationSumMap = getDailyDurationSumMap(userId, startDate, endDate);
-    Double minValue = Collections.min(dailyDurationSumMap.values());
     for (Map.Entry<Date, Double> entry : dailyDurationSumMap.entrySet()) {
-      if (entry.getValue().equals(minValue)) {
-        return entry.getKey();
+      if (entry.getValue() < averD) {
+        returnVal.add(entry.getKey());
       }
     }
-    return null;
+    return returnVal;
   }
 
   @Override

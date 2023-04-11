@@ -60,12 +60,12 @@ class UserService {
     return await axios.get(`${USER_API_BASE_URL}/${id}/smallestCaloriesBetweenDates?startDate=${startDate}&endDate=${endDate}`);
   }
 
-  async getSmallestDurationDateBetweenDates(id, startDate, endDate) {
-    return await axios.get(`${USER_API_BASE_URL}/${id}/smallestDurationDateBetweenDates?startDate=${startDate}&endDate=${endDate}`);
+  async getUnderAveragedCaloriesDateBetweenDates(id, caloriesGoal, startDate, endDate) {
+    return await axios.get(`${USER_API_BASE_URL}/${id}/underAveragedCaloriesDateBetweenDates?caloriesGoal=${caloriesGoal}&startDate=${startDate}&endDate=${endDate}`);
   }
 
-  async getSmallestCaloriesDateBetweenDates(id, startDate, endDate) {
-    return await axios.get(`${USER_API_BASE_URL}/${id}/smallestCaloriesDateBetweenDates?startDate=${startDate}&endDate=${endDate}`);
+  async getUnderAveragedDurationDateBetweenDates(id, durationGoal, startDate, endDate) {
+    return await axios.get(`${USER_API_BASE_URL}/${id}/underAveragedDurationDateBetweenDates?durationGoal=${durationGoal}&startDate=${startDate}&endDate=${endDate}`);
   }
 
 }

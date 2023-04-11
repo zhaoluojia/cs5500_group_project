@@ -19,6 +19,15 @@ const ExerciseSummaryComponent = () => {
   const [showChart, setShowChart] = useState(false);
   const [smallestDurationDate, setSmallestDurationDate] = useState(null);
   const [smallestCaloriesDate, setSmallestCaloriesDate] = useState(null);
+  const [caloriesTotal, setCaloriesTotal] = useState(0);
+  const [durationTotal, setDurationTotal] = useState(0);
+  const [caloriesGoal, setCaloriesGoal] = useState(0);
+  const [durationGoal, setDurationGoal] = useState(0);
+  const [underAveragedDurationList, setUnderAveragedDurationList] = useState(null);
+  const [underAveragedCaloriesList, setUnderAveragedCaloriesList] = useState(null);
+  const [showSuggestion, setShowSuggestion] = useState(false);
+  const [aveCals, setAveCals] = useState(0);
+  const [aveDur, setAveDur] = useState(0);
 
   const handleUserSubmitBtn = async (e) => {
     e.preventDefault();
@@ -31,6 +40,7 @@ const ExerciseSummaryComponent = () => {
       const response = await UserService.getUserIdByUserName(userName);
       setUserId(response.data);
       setUserExist(true);
+
       console.log(response.data);
     } catch (error) {
       setError('Username does not exit')
@@ -51,46 +61,67 @@ const ExerciseSummaryComponent = () => {
       setError('The end date cannot be before the start date')
       return
     }
+    if ((new Date(endDate) - new Date(startDate)) / (1000*60*60*24) + 1 > 20) {
+      setError('The end date should not be more than 20 days later.')
+      return
+    }
     setError(null)
     try {
       const response = await UserService.getDailyCaloriesSumMap(userId, startDate, endDate);
       const response2 = await UserService.getDailyDurationSumMap(userId, startDate, endDate);
-      const response3 = await UserService.getSmallestCaloriesDateBetweenDates(userId, startDate, endDate);
-      const response4 = await UserService.getSmallestDurationDateBetweenDates(userId, startDate, endDate);
+      const response3 = await UserService.getCaloriesTotalBetweenDates(userId, startDate, endDate);
+      const response4 = await UserService.getDurationTotalBetweenDates(userId, startDate, endDate);
+      const response5 = await UserService.getCaloriesGoalByUserId(userId);
+      const response6 = await UserService.getDurationGoalByUserId(userId);
+
       setDailyCaloriesSumMap(new Map(Object.entries(response.data)));
       setDailyDurationSumMap(new Map(Object.entries(response2.data)));
-      setSmallestCaloriesDate(response3.data);
-      setSmallestDurationDate(response4.data);
-
-      console.log(response.data);
-      console.log(response2.data);
-      console.log(dailyCaloriesSumMap);
-      console.log(dailyDurationSumMap);
+      setCaloriesTotal(response3.data);
+      setDurationTotal(response4.data);
+      console.log(response5);
+      setCaloriesGoal(response5.data["caloriesGoal"]);
+      setDurationGoal(response6.data["durationGoal"]);
       setGenerateReport(true);
-      console.log(generateReport);
+
     } catch (e) {
       setError('Failed to generate report based on your input. Please try again.');
     }
   }
 
-  const handleViewReportBtn = () => {
+  const handleViewReportBtn = async(e) => {
     try {
+      e.preventDefault();
+      console.log(typeof caloriesGoal);
+      const response11 = await UserService.getUnderAveragedCaloriesDateBetweenDates(userId, caloriesGoal, startDate, endDate);
+      const response12 = await UserService.getUnderAveragedDurationDateBetweenDates(userId, durationGoal, startDate, endDate);
+      console.log(response11);
+      setUnderAveragedCaloriesList(response11.data.map(x => (x.slice(0, 10))).sort());
+      setUnderAveragedDurationList(response12.data.map(x => (x.slice(0, 10))).sort());
+      console.log(underAveragedDurationList);
+
+      const transferredCPair = new Map([...dailyCaloriesSumMap.entries()].sort());
+      const transferredDPair = new Map([...dailyDurationSumMap.entries()].sort());
+      const diff = (new Date(endDate) - new Date(startDate)) / (1000*60*60*24) + 1;
+      setAveCals(caloriesGoal / diff);
+      setAveDur(durationGoal / diff);
+
       setCaloriesData({
-        labels: Array.from( dailyCaloriesSumMap.keys() ).map(function(v) { return v.slice(0, 10) }),
+        labels: Array.from( transferredCPair.keys() ).map(function(v) { return v.slice(0, 10) }).slice(0, 20),
         datasets: [{
           label: "Calories (kcals)",
-          data: Array.from( dailyCaloriesSumMap.values() ),
+          data: Array.from( transferredCPair.values() ).slice(0, 20),
         }]
       });
       setDurationData({
-        labels: Array.from( dailyDurationSumMap.keys() ).map(function(v) { return v.slice(0, 10) }),
+        labels: Array.from( transferredDPair.keys() ).map(function(v) { return v.slice(0, 10) }).slice(0, 20),
         datasets: [{
           label: "Duration (mins)",
-          data: Array.from( dailyDurationSumMap.values() ),
+          data: Array.from( transferredDPair.values() ).slice(0, 20),
         }]
       })
 
       setShowChart(true);
+      setShowSuggestion(true);
     } catch (e) {
       setError('Failed to view report. Please try again.');
     }
@@ -176,9 +207,37 @@ const ExerciseSummaryComponent = () => {
               <div className="alert alert-dismissible alert-primary mt-4">
                 <button type="button" className="btn-close"
                         data-bs-dismiss="alert"></button>
-                <h4 className="alert-heading">Suggestions</h4>
-                <p className="mb-0">We suggest you to exercise more on {smallestDurationDate.slice(0, 10)} to reach your duration goal.</p>
-                <p className="mb-0">We suggest you to exercise more on {smallestCaloriesDate.slice(0, 10)} to reach your calories goal.</p>
+                <h4 className="alert-heading">Calories Goal Suggestions</h4>
+                {showSuggestion &&
+                (caloriesTotal < caloriesGoal) &&
+                  <div>
+                    <p>You are {caloriesGoal - caloriesTotal} kcals away from your calories goal {caloriesGoal}. </p>
+                    <p> Your suggested daily calories is {aveCals.toFixed(2)} kcals. </p>
+                    <p>We suggest you to exercise more on at least one of the following days to reach your calories goal: {underAveragedCaloriesList.map(x => x + ". ")} </p>
+                  </div>
+                }
+                {showSuggestion &&
+                    (caloriesTotal >= caloriesGoal) &&
+                    <div>
+                      <p> Congratulations! You have reach your calories goal {caloriesGoal}! </p>
+                    </div>
+                }
+                <h4 className="alert-heading">Duration Goal Suggestions</h4>
+                {showSuggestion &&
+                    (durationTotal >= durationGoal) &&
+                    <div>
+                      <p> Congratulations! You have reach your duration goal {durationGoal}! </p>
+                    </div>
+                }
+
+                {showSuggestion &&
+                    (durationTotal < durationGoal) &&
+                    <div>
+                      <p>You are {durationGoal - durationTotal} mins away from your duration goal {durationGoal}. </p>
+                      <p> Your suggested daily duration is {aveDur.toFixed(2)} mins. </p>
+                      <p>We suggest you to exercise more on at least one of the following days to reach your duration goal: {underAveragedDurationList.map(x => x + ". ")} </p>
+                    </div>
+                }
               </div>
             </div>
         }

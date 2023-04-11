@@ -231,17 +231,19 @@ public class UserController {
   }
 
   /**
-   * Get the smallest duration date between the given start date and end date.
+   * Get the under Averaged duration date list between the given start date and end date.
    * @param userId userId.
+   * @param durationGoal durationGoal.
    * @param startDate the start date (Date).
    * @param endDate the end date (Date).
-   * @return the smallest duration date between start date and end date.
+   * @return the under Averaged duration date list between start date and end date.
    */
-  @RequestMapping(value = "/{userId}/smallestDurationDateBetweenDates", method = RequestMethod.GET)
-  public Date getSmallestDurationDateBetweenDates(@PathVariable Long userId,
-      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
-    return userService.getSmallestDurationDateBetweenDates(userId, startDate, endDate);
+  @RequestMapping(value = "/{userId}/underAveragedDurationDateBetweenDates", method = RequestMethod.GET)
+  public List<Date> getUnderAveragedDurationDateBetweenDates(@PathVariable Long userId,
+                                                             @RequestParam("durationGoal") Double durationGoal,
+                                                             @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                                             @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+    return userService.getUnderAveragedDurationDateBetweenDates(userId, durationGoal, startDate, endDate);
   }
 
   /**
@@ -253,23 +255,25 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/smallestCaloriesBetweenDates", method = RequestMethod.GET)
   public Double getSmallestCaloriesBetweenDates(@PathVariable Long userId,
-      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+                                                @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                                @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getSmallestCaloriesBetweenDates(userId, startDate, endDate);
   }
 
   /**
-   * Get the smallest calories date between the given start date and end date.
+   * Get the Under Averaged calories date list between the given start date and end date.
    * @param userId userId.
+   * @param caloriesGoal caloriesGoal
    * @param startDate the start date (Date).
    * @param endDate the end date (Date).
-   * @return the smallest calories between start date and end date.
+   * @return the under averaged calories date list between start date and end date.
    */
-  @RequestMapping(value = "/{userId}/smallestCaloriesDateBetweenDates", method = RequestMethod.GET)
-  public Date getSmallestCaloriesDateBetweenDates(@PathVariable Long userId,
-      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
-    return userService.getSmallestCaloriesDateBetweenDates(userId, startDate, endDate);
+  @RequestMapping(value = "/{userId}/underAveragedCaloriesDateBetweenDates", method = RequestMethod.GET)
+  public List<Date> getUnderAveragedCaloriesDateBetweenDates(@PathVariable Long userId,
+                                                             @RequestParam("caloriesGoal") Double caloriesGoal,
+                                                             @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                                             @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+    return userService.getUnderAveragedCaloriesDateBetweenDates(userId, caloriesGoal, startDate, endDate);
   }
 
   /**

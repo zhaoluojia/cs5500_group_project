@@ -46,9 +46,9 @@ public interface UserService {
 
   Double getSmallestCaloriesBetweenDates(Long userId, Date startDate, Date endDate);
 
-  Date getSmallestCaloriesDateBetweenDates(Long userId, Date startDate, Date endDate);
+  List<Date> getUnderAveragedCaloriesDateBetweenDates(Long userId, Double goal, Date startDate, Date endDate);
 
-  Date getSmallestDurationDateBetweenDates(Long userId, Date startDate, Date endDate);
+  List<Date> getUnderAveragedDurationDateBetweenDates(Long userId, Double goal, Date startDate, Date endDate);
 
   void updateWeight(Long userId, Double weight);
 

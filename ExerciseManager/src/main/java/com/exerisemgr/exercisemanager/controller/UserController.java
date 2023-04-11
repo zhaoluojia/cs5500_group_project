@@ -25,7 +25,7 @@ public class UserController {
 
   /**
    * Create the User.
-   * @return: string
+   * @return string
    */
   @RequestMapping(value="/register", method = RequestMethod.POST)
   public String createUser(@RequestParam String userName,@RequestParam String password, @RequestParam Double weight) {
@@ -51,13 +51,13 @@ public class UserController {
    */
   @RequestMapping(value = "/allUsers", method = RequestMethod.GET)
   public ResponseEntity<List<User>> getAllUser(){
-    return new ResponseEntity<List<User>>(userService.getAllUser(), HttpStatus.OK);
+    return new ResponseEntity<>(userService.getAllUser(), HttpStatus.OK);
   }
 
   /**
    * Get the User by userId
    * @param userId: the userId.
-   * @return: the User.
+   * @return the User.
    */
   @RequestMapping(value="/{userId}", method = RequestMethod.GET)
   public User getUserById(@PathVariable Long userId) {
@@ -67,7 +67,7 @@ public class UserController {
   /**
    * Get the User by userName
    * @param userName: the userName.
-   * @return: the User.
+   * @return the User.
    */
   @RequestMapping(value="/{userName}/userName", method = RequestMethod.GET)
   public User getUserByUserName(@PathVariable String userName) {
@@ -77,7 +77,7 @@ public class UserController {
   /**
    * Get the UserId by userName
    * @param userName: the userName.
-   * @return: the UserId.
+   * @return the UserId.
    */
   @RequestMapping(value="/{userName}/userId", method = RequestMethod.GET)
   public Long getUserIdByUserName(@PathVariable String userName) {
@@ -85,13 +85,35 @@ public class UserController {
   }
 
   /**
-   * Get the weight of the user by userId.
+   * Get the weight of the user by userName.
    * @param userId userId.
    * @return user's weight.
    */
   @RequestMapping(value = "/{userId}/weight", method = RequestMethod.GET)
   public Double getWeightByUserId(@PathVariable Long userId) {
     return userService.getWeightByUserId(userId);
+  }
+
+  /**
+   * Get the weight of the user by userName.
+   * @param userName userName.
+   * @return user's weight.
+   */
+  @RequestMapping(value = "/{userName}/weightByUserName", method = RequestMethod.GET)
+  public Double getWeightByUserId(@PathVariable String userName) {
+    return userService.getWeightByUserName(userName);
+  }
+
+  /**
+   * Calculate the calories of the user by weight, exerciseName, duration.
+   * @param weight weight.
+   * @param exerciseName exerciseName.
+   * @param duration duration.
+   * @return calories burned.
+   */
+  @RequestMapping(value = "/calories", method = RequestMethod.GET)
+  public Double calculateCalories(@RequestParam Double weight, @RequestParam String exerciseName, @RequestParam Double duration) {
+    return userService.calculateCalories(weight, exerciseName, duration);
   }
 
   /**
@@ -143,7 +165,7 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/dailyDurations", method = RequestMethod.GET)
   public Map<Date, Double> getDailyDurationSumMap(@PathVariable Long userId, @RequestParam("startDate")
-      @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+  @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
       @RequestParam("endDate")
       @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getDailyDurationSumMap(userId, startDate, endDate);
@@ -209,6 +231,20 @@ public class UserController {
   }
 
   /**
+   * Get the smallest duration date between the given start date and end date.
+   * @param userId userId.
+   * @param startDate the start date (Date).
+   * @param endDate the end date (Date).
+   * @return the smallest duration date between start date and end date.
+   */
+  @RequestMapping(value = "/{userId}/smallestDurationDateBetweenDates", method = RequestMethod.GET)
+  public Date getSmallestDurationDateBetweenDates(@PathVariable Long userId,
+      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+    return userService.getSmallestDurationDateBetweenDates(userId, startDate, endDate);
+  }
+
+  /**
    * Get the smallest calories between the given start date and end date.
    * @param userId userId.
    * @param startDate the start date (Date).
@@ -220,6 +256,20 @@ public class UserController {
       @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
       @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
     return userService.getSmallestCaloriesBetweenDates(userId, startDate, endDate);
+  }
+
+  /**
+   * Get the smallest calories date between the given start date and end date.
+   * @param userId userId.
+   * @param startDate the start date (Date).
+   * @param endDate the end date (Date).
+   * @return the smallest calories between start date and end date.
+   */
+  @RequestMapping(value = "/{userId}/smallestCaloriesDateBetweenDates", method = RequestMethod.GET)
+  public Date getSmallestCaloriesDateBetweenDates(@PathVariable Long userId,
+      @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+      @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+    return userService.getSmallestCaloriesDateBetweenDates(userId, startDate, endDate);
   }
 
   /**
@@ -287,9 +337,9 @@ public class UserController {
    */
   @RequestMapping(value = "/{userId}/exerciseList", method = RequestMethod.POST)
   public ResponseEntity<String> createExercise(@PathVariable Long userId,
-      @RequestParam String exerciseName,
+      @RequestParam("exerciseName") String exerciseName,
       @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
-      @RequestParam Double duration) {
+      @RequestParam("duration") Double duration) {
     userService.addExercise(userId, exerciseName, date, duration);
 
     return ResponseEntity.ok("Exercise added successfully");

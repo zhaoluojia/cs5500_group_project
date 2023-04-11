@@ -4,6 +4,18 @@ const USER_API_BASE_URL = "http://localhost:8080/api/users";
 
 class UserService {
 
+  async createExercise(id, exerciseName, date, duration){
+    return await axios.post(`${USER_API_BASE_URL}/${id}/exerciseList?exerciseName=${exerciseName}&date=${date}&duration=${duration}`);
+  }
+
+  async getWeightByUserName(userName){
+    return await axios.get(`${USER_API_BASE_URL}/${userName}/weightByUserName`);
+  }
+
+  async calculateCalories(weight, exerciseName, duration){
+    return await axios.get(`${USER_API_BASE_URL}/calories?weight=${weight}&exerciseName=${exerciseName}&duration=${duration}`);
+  }
+
   async getUserIdByUserName(userName){
     return await axios.get(`${USER_API_BASE_URL}/${userName}/userId`, { transformResponse: [data => JSON.stringify(data).replaceAll("\"", "")] });
   }
@@ -31,6 +43,31 @@ class UserService {
   async updateDurationGoal(id, durationGoalStartDate, durationGoalEndDate, duration){
     return await axios.put(`${USER_API_BASE_URL}/${id}/durationGoal?startDate=${durationGoalStartDate}&endDate=${durationGoalEndDate}&durationGoal=${duration}`);
   }
+
+  async getDailyCaloriesSumMap(id, caloriesStartDate, caloriesEndDate) {
+    return await axios.get(`${USER_API_BASE_URL}/${id}/dailyCalories?startDate=${caloriesStartDate}&endDate=${caloriesEndDate}`);
+  }
+
+  async getDailyDurationSumMap(id, startDate, endDate) {
+    return await axios.get(`${USER_API_BASE_URL}/${id}/dailyDurations?startDate=${startDate}&endDate=${endDate}`);
+  }
+
+  async getSmallestDurationBetweenDates(id, startDate, endDate) {
+    return await axios.get(`${USER_API_BASE_URL}/${id}/smallestDurationBetweenDates?startDate=${startDate}&endDate=${endDate}`);
+  }
+
+  async getSmallestCaloriesBetweenDates(id, startDate, endDate) {
+    return await axios.get(`${USER_API_BASE_URL}/${id}/smallestCaloriesBetweenDates?startDate=${startDate}&endDate=${endDate}`);
+  }
+
+  async getSmallestDurationDateBetweenDates(id, startDate, endDate) {
+    return await axios.get(`${USER_API_BASE_URL}/${id}/smallestDurationDateBetweenDates?startDate=${startDate}&endDate=${endDate}`);
+  }
+
+  async getSmallestCaloriesDateBetweenDates(id, startDate, endDate) {
+    return await axios.get(`${USER_API_BASE_URL}/${id}/smallestCaloriesDateBetweenDates?startDate=${startDate}&endDate=${endDate}`);
+  }
+
 }
 
 export default new UserService();

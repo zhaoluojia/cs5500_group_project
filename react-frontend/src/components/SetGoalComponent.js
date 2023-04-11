@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import UserService from "../services/UserService";
+import HeaderComponent from "./HeaderComponent";
 
-const PageTwoComponent = () => {
+const SetGoalComponent = () => {
 
   const [error, setError] = useState(null)
-  const [message, setMessage] = useState(null)
   const [userName, setUserName] = useState('')
   const [userExist, setUserExist] = useState(false)
   const [userId, setUserId] = useState('')
@@ -66,11 +66,9 @@ const PageTwoComponent = () => {
       console.log(response1.data);
       const response2 = await UserService.getCaloriesGoalByUserId(userId);
       setCaloriesGoal(response2.data);
-      setMessage('You\'ve successfully set a goal!');
       console.log(response2.data);
-      return;
     } catch (error) {
-      setError('An error occurred. Please try again.');
+      setError('Failed to set calories goal based on your input. Please try again.');
     }
   };
 
@@ -98,49 +96,42 @@ const PageTwoComponent = () => {
       console.log(response1.data);
       const response2 = await UserService.getDurationGoalByUserId(userId);
       setDurationGoal(response2.data);
-      setMessage('You\'ve successfully set a goal!');
       console.log(response2.data);
-      return;
     } catch (error) {
-      setError('An error occurred. Please try again.');
+      setError('Failed to set duration goal based on your input. Please try again.');
     }
   };
 
-  const handleTrackCaloriesProgressBtn = async (e) => {
+  const handleTrackCaloriesProgressBtn = async () => {
     try {
       const response = await UserService.getCaloriesTotalBetweenDates(userId, caloriesGoalStartDate, caloriesGoalEndDate);
       setCaloriesTotal(response.data);
       console.log(response.data);
       setShowCaloriesProgress(true);
     } catch (error) {
-      setError('An error occurred. Please try again.');
+      setError('Failed to track your progress. Please try again.');
     }
   };
 
-  const handleTrackDurationProgressBtn = async (e) => {
+  const handleTrackDurationProgressBtn = async () => {
     try {
       const response = await UserService.getDurationTotalBetweenDates(userId, durationGoalStartDate, durationGoalEndDate);
       setDurationTotal(response.data);
       console.log(response.data);
       setShowDurationProgress(true);
     } catch (error) {
-      setError('An error occurred. Please try again.');
+      setError('Failed to track your progress. Please try again.');
     }
   };
 
   return (
-      <div className="mt-4">
-        <h2>Set a Goal and Track your progress</h2>
+      <div>
+        {<HeaderComponent/>}
+        <h2 className="mt-4">Set Goal</h2>
         {
             error &&
             <div className="alert alert-dismissible alert-danger mt-3 mb-0">
               {error}
-            </div>
-        }
-        {
-            !error && message &&
-            <div className="alert alert-dismissible alert-secondary mt-3 mb-0">
-              {message}
             </div>
         }
         <div className="form-group">
@@ -159,13 +150,13 @@ const PageTwoComponent = () => {
             <div>
               <div className="form-group">
                 <label htmlFor="goal"
-                       className="form-label mt-4">Select a Goal</label>
+                       className="form-label mt-2">Select a Goal</label>
                 <div className="form-check">
                   <input className="form-check-input" type="radio"
                          name="optionsRadios" id="caloriesGoalRadio"
                          value="caloriesGoalRadio"
                          defaultChecked
-                         onChange={(e) => {
+                         onChange={() => {
                            setShowCaloriesGoalForm(!showCaloriesGoalForm);
                            setShowDurationGoalForm(!showDurationGoalForm)
                          }}/>
@@ -178,7 +169,7 @@ const PageTwoComponent = () => {
                   <input className="form-check-input" type="radio"
                          name="optionsRadios" id="durationGoalRadio"
                          value="durationGoalRadio"
-                         onChange={(e) => {
+                         onChange={() => {
                            setShowDurationGoalForm(!showDurationGoalForm);
                            setShowCaloriesGoalForm(!showCaloriesGoalForm)
                          }}/>
@@ -193,7 +184,7 @@ const PageTwoComponent = () => {
                   <div>
                     <div className="form-group">
                       <label htmlFor="calories"
-                             className="form-label mt-4">Calories Goal</label>
+                             className="form-label mt-2">Calories Goal</label>
                       <input type="text" className="form-control"
                              id="calories" placeholder="Calories Goal"
                              value={calories}
@@ -201,7 +192,7 @@ const PageTwoComponent = () => {
                     </div>
                     <div className="form-group">
                       <label htmlFor="caloriesGoalStartDate"
-                             className="form-label mt-2 me-2">Start Date</label>
+                             className="form-label mt-2">Start Date</label>
                       <input type="date" className="form-control"
                              id="caloriesGoalStartDate"
                              value={caloriesGoalStartDate}
@@ -210,7 +201,7 @@ const PageTwoComponent = () => {
                     </div>
                     <div className="form-group">
                       <label htmlFor="caloriesGoalEndDate"
-                             className="form-label mt-2 me-2">End Date</label>
+                             className="form-label mt-2">End Date</label>
                       <input type="date" className="form-control"
                              id="caloriesGoalEndDate"
                              value={caloriesGoalEndDate}
@@ -224,17 +215,20 @@ const PageTwoComponent = () => {
                     {
                       caloriesGoal &&
                         <div>
+                          <p className="text-secondary mt-2">You have successfully set a goal!</p>
                           <button
-                              type="submit" className="btn btn-primary mt-4 mb-4"
+                              type="submit" className="btn btn-primary mt-2 mb-2"
                               onClick={handleTrackCaloriesProgressBtn}>Track My
                             Progress
                           </button>
                           {
                             showCaloriesProgress &&
-                              <div>
-                                <h5>You have completed {Math.round(
-                                caloriesTotal / calories * 100)}%
-                                of your calories goal!</h5>
+                              <div className="alert alert-dismissible alert-primary mt-4">
+                                <button type="button" className="btn-close"
+                                        data-bs-dismiss="alert"></button>
+                                <h4 className="alert-heading">You have completed <strong>{Math.round(
+                                    caloriesTotal / calories * 100)}% </strong>
+                                of your calories goal!</h4>
                                 <div className="progress mb-4">
                                   <div
                                   className="progress-bar progress-bar-striped bg-warning"
@@ -247,10 +241,10 @@ const PageTwoComponent = () => {
                                   / calories * 100}%`
                                 }}></div>
                                 </div>
-                                <h6>Total Calories burned: {caloriesTotal}</h6>
-                                <h6>Calories Goal: {calories}</h6>
-                                <h6>Start Date: {caloriesGoalStartDate}</h6>
-                                <h6>End Date: {caloriesGoalEndDate}</h6>
+                                <p className="mb-0">Total Calories burned: {caloriesTotal}</p>
+                                <p className="mb-0">Calories Goal: {calories}</p>
+                                <p className="mb-0">Start Date: {caloriesGoalStartDate}</p>
+                                <p className="mb-0">End Date: {caloriesGoalEndDate}</p>
                               </div>
                           }
                         </div>
@@ -262,7 +256,7 @@ const PageTwoComponent = () => {
                   <div>
                     <div className="form-group">
                       <label htmlFor="duration"
-                             className="form-label mt-4">Duration Goal</label>
+                             className="form-label mt-2">Duration Goal</label>
                       <input type="text" className="form-control"
                              id="duration" placeholder="Duration Goal"
                              value={duration}
@@ -270,7 +264,7 @@ const PageTwoComponent = () => {
                     </div>
                     <div className="form-group">
                       <label htmlFor="durationGoalStartDate"
-                             className="form-label mt-2 me-2">Start Date</label>
+                             className="form-label mt-2">Start Date</label>
                       <input type="date" className="form-control"
                              id="durationGoalStartDate"
                              value={durationGoalStartDate}
@@ -279,7 +273,7 @@ const PageTwoComponent = () => {
                     </div>
                     <div className="form-group">
                       <label htmlFor="durationGoalEndDate"
-                             className="form-label mt-2 me-2">End Date</label>
+                             className="form-label mt-2">End Date</label>
                       <input type="date" className="form-control"
                              id="durationGoalEndDate"
                              value={durationGoalEndDate}
@@ -293,35 +287,38 @@ const PageTwoComponent = () => {
                     {
                         durationGoal &&
                         <div>
+                          <p className="text-secondary mt-2">You have successfully set a goal!</p>
                           <button
                               type="submit"
-                              className="btn btn-primary mt-4 mb-4"
+                              className="btn btn-primary mt-2 mb-2"
                               onClick={handleTrackDurationProgressBtn}>Track My
                             Progress
                           </button>
                           {
                               showDurationProgress &&
-                              <div>
-                                <h5>You have completed {Math.round(
-                                    durationTotal / duration * 100)}%
-                                  of your duration goal!</h5>
-                                <div className="progress mb-4">
-                                  <div
-                                      className="progress-bar progress-bar-striped bg-warning"
-                                      role="progressbar"
-                                      aria-valuenow={durationTotal
-                                          / duration * 100}
-                                      aria-valuemin="0"
-                                      aria-valuemax="100" style={{
-                                    width: `${durationTotal
-                                    / duration * 100}%`
-                                  }}></div>
+                                <div className="alert alert-dismissible alert-primary mt-4">
+                                  <button type="button" className="btn-close"
+                                          data-bs-dismiss="alert"></button>
+                                  <h4 className="alert-heading">You have completed <strong>{Math.round(
+                                      durationTotal / duration * 100)}% </strong>
+                                    of your duration goal!</h4>
+                                  <div className="progress mb-4">
+                                    <div
+                                        className="progress-bar progress-bar-striped bg-warning"
+                                        role="progressbar"
+                                        aria-valuenow={durationTotal
+                                            / duration * 100}
+                                        aria-valuemin="0"
+                                        aria-valuemax="100" style={{
+                                      width: `${durationTotal
+                                      / duration * 100}%`
+                                    }}></div>
+                                  </div>
+                                  <p className="mb-0">Total Durations: {durationTotal}</p>
+                                  <p className="mb-0">Duration Goal: {duration}</p>
+                                  <p className="mb-0">Start Date: {durationGoalStartDate}</p>
+                                  <p className="mb-0">End Date: {durationGoalEndDate}</p>
                                 </div>
-                                <h6>Total Exercise Duration: {durationTotal}</h6>
-                                <h6>Duration Goal: {duration}</h6>
-                                <h6>Start Date: {durationGoalStartDate}</h6>
-                                <h6>End Date: {durationGoalEndDate}</h6>
-                              </div>
                           }
                         </div>
                     }
@@ -333,4 +330,4 @@ const PageTwoComponent = () => {
   )
 };
 
-export default PageTwoComponent;
+export default SetGoalComponent;

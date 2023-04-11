@@ -106,6 +106,17 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
+  public Double getWeightByUserName(String userName) {
+    Optional <User> userDb = this.userRepository.findByUserName(userName);
+
+    if (userDb.isPresent()){
+      return userDb.get().getWeight();
+    } else {
+      throw new ResourceNotFoundException("Record not found with userName: " + userName);
+    }
+  }
+
+  @Override
   public DurationGoal getDurationGoalByUserId(Long userId) {
     Optional <User> userDb = this.userRepository.findById(userId);
 
@@ -225,6 +236,30 @@ public class UserServiceImpl implements UserService{
   }
 
   @Override
+  public Date getSmallestCaloriesDateBetweenDates(Long userId, Date startDate, Date endDate) {
+    Map<Date, Double> dailyCaloriesSumMap = getDailyCaloriesSumMap(userId, startDate, endDate);
+    Double minValue = Collections.min(dailyCaloriesSumMap.values());
+    for (Map.Entry<Date, Double> entry : dailyCaloriesSumMap.entrySet()) {
+      if (entry.getValue().equals(minValue)) {
+        return entry.getKey();
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public Date getSmallestDurationDateBetweenDates(Long userId, Date startDate, Date endDate) {
+    Map<Date, Double> dailyDurationSumMap = getDailyDurationSumMap(userId, startDate, endDate);
+    Double minValue = Collections.min(dailyDurationSumMap.values());
+    for (Map.Entry<Date, Double> entry : dailyDurationSumMap.entrySet()) {
+      if (entry.getValue().equals(minValue)) {
+        return entry.getKey();
+      }
+    }
+    return null;
+  }
+
+  @Override
   public void updateWeight(Long userId, Double weight) {
     Optional <User> userDb = this.userRepository.findById(userId);
 
@@ -282,7 +317,6 @@ public class UserServiceImpl implements UserService{
 
     if (userDb.isPresent()){
       Double calories = calculateCalories(userDb.get().getWeight(), exerciseName, duration);
-      Long uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
       Exercise e = new Exercise(userId, exerciseName, date, duration, calories);
       userDb.get().getExerciseList().add(e);
       this.userRepository.save(userDb.get());
@@ -291,7 +325,8 @@ public class UserServiceImpl implements UserService{
     }
   }
 
-  private Double calculateCalories(Double weight, String exerciseName, Double duration) {
+  @Override
+  public Double calculateCalories(Double weight, String exerciseName, Double duration) {
     double mets;
     switch (exerciseName) {
       case "walking":

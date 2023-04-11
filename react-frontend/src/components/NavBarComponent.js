@@ -13,16 +13,16 @@ const NavBarComponent = () => {
             <div className="collapse navbar-collapse" id="navbarColor01">
               <ul className="navbar-nav me-auto">
                 <li className="nav-item">
-                  <a className={`nav-link ${active === 'page_one' ? 'active'
-                      : ''}`} href="page_one">Page 1</a>
+                  <a className={`nav-link ${active === 'add_exercise' ? 'active'
+                      : ''}`} href="add_exercise">Add Exercise</a>
                 </li>
                 <li className="nav-item">
-                  <a className={`nav-link ${active === 'page_two' ? 'active'
-                      : ''}`} href="page_two">Set Goal</a>
+                  <a className={`nav-link ${active === 'set_goal' ? 'active'
+                      : ''}`} href="set_goal">Set Goal</a>
                 </li>
                 <li className="nav-item">
-                  <a className={`nav-link ${active === 'page_three' ? 'active'
-                      : ''}`} href="page_three">Page 3</a>
+                  <a className={`nav-link ${active === 'exercise_summary' ? 'active'
+                      : ''}`} href="exercise_summary">Exercise Summary</a>
                 </li>
               </ul>
             </div>

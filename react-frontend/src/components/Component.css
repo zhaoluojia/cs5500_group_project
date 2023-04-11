@@ -1,0 +1,17 @@
+.header-wrapper {
+  height: 300px;
+}
+
+.container-wrapper {
+  width: 32%;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  margin: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.footer-wrapper {
+  height: 50px;
+}

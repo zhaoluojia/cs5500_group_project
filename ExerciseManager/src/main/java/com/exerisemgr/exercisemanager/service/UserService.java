@@ -24,6 +24,8 @@ public interface UserService {
 
   Double getWeightByUserId(Long userId);
 
+  Double getWeightByUserName(String userName);
+
   DurationGoal getDurationGoalByUserId(Long userId);
 
   CaloriesGoal getCaloriesGoalByUserId(Long userId);
@@ -44,6 +46,10 @@ public interface UserService {
 
   Double getSmallestCaloriesBetweenDates(Long userId, Date startDate, Date endDate);
 
+  Date getSmallestCaloriesDateBetweenDates(Long userId, Date startDate, Date endDate);
+
+  Date getSmallestDurationDateBetweenDates(Long userId, Date startDate, Date endDate);
+
   void updateWeight(Long userId, Double weight);
 
   void updatePassword(Long userId, String password);
@@ -59,5 +65,7 @@ public interface UserService {
   void deleteDurationGoal(Long userId);
 
   void deleteCaloriesGoal(Long userId);
+
+  Double calculateCalories(Double weight, String exerciseName, Double duration);
 
 }

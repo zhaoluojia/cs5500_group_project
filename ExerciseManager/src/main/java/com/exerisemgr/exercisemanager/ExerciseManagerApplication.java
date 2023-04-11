@@ -17,7 +17,7 @@ public class ExerciseManagerApplication{
     }
 
     @Configuration
-    public class CrossOriginConfig {
+    public static class CrossOriginConfig {
 
         @Bean
         public WebMvcConfigurer corsConfigurer() {

@@ -4,9 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import {Route, Routes} from "react-router";
 import NavBarComponent from './components/NavBarComponent';
 import HomeComponent from './components/HomeComponent';
-import PageOneComponent from "./components/PageOneComponent";
-import PageTwoComponent from "./components/PageTwoComponent";
-import PageThreeComponent from "./components/PageThreeComponent";
+import AddExerciseComponent from "./components/AddExerciseComponent";
+import SetGoalComponent from "./components/SetGoalComponent";
+import ExerciseSummaryComponent from "./components/ExerciseSummaryComponent";
 
 function App() {
   return (
@@ -16,9 +16,9 @@ function App() {
         <Routes>
           <Route index element={<HomeComponent/>}/>
           <Route path="/home" element={<HomeComponent/>}/>
-          <Route path="/page_one" element={<PageOneComponent/>}/>
-          <Route path="/page_two" element={<PageTwoComponent/>}/>
-          <Route path="/page_three" element={<PageThreeComponent/>}/>
+          <Route path="/add_exercise" element={<AddExerciseComponent/>}/>
+          <Route path="/set_goal" element={<SetGoalComponent/>}/>
+          <Route path="/exercise_summary" element={<ExerciseSummaryComponent/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -26,6 +26,7 @@ public class ExerciseManagerApplication{
                 public void addCorsMappings(CorsRegistry registry) {
                     registry.addMapping("/**")
                         .allowedOrigins("http://localhost:3000")
+                            .allowedOrigins("https://main--idyllic-sundae-dcf08c.netlify.app/")
                         .allowedMethods("GET", "PUT", "POST", "DELETE");
                 }
             };

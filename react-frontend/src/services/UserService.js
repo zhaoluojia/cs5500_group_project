@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = "https://44.239.243.104:8080/api/users";
+const USER_API_BASE_URL = "https://44.239.243.104:443/api/users";
 // const USER_API_BASE_URL = "http://localhost:8080/api/users";
 
 class UserService {

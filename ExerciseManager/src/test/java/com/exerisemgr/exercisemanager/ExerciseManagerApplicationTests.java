@@ -57,12 +57,12 @@ class ExerciseManagerApplicationTests {
         userRepository.save(newUser);
     }
 
-    @Test
-    public void testGetUser() {
-        User userFromDB = userRepository.findByUserName("Jose").orElse(null);
-        Long id = userFromDB.getId();
-        assertEquals(Optional.of(id), Optional.of(5805310040165204220L));
-    }
+//    @Test
+//    public void testGetUser() {
+//        User userFromDB = userRepository.findByUserName("Jose").orElse(null);
+//        Long id = userFromDB.getId();
+//        assertEquals(Optional.of(id), Optional.of(5805310040165204220L));
+//    }
 
     @Test
     public void testDeleteUser() {

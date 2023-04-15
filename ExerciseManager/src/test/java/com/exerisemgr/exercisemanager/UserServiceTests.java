@@ -14,6 +14,7 @@ import com.exerisemgr.exercisemanager.repository.UserRepository;
 import com.exerisemgr.exercisemanager.service.UserServiceImpl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -485,4 +486,116 @@ public class UserServiceTests {
                     "Record not found with id: 8905779767761850010");
     Assertions.assertEquals("Record not found with id: 8905779767761850010", thrown.getMessage());
   }
+
+  @Test
+  public void testGetUnderAveragedCaloriesDateBetweenDates(){
+    System.out.println("--------Test Get Under Averaged Calories Date Between Dates Successful--------");
+    given(userRepository.findById(7111625591464479902L)).willReturn(Optional.of(user2));
+    List<Date> underAveraged = userService.getUnderAveragedCaloriesDateBetweenDates(7111625591464479902L, 100.0, first, sixth);
+    System.out.println(underAveraged);
+    assertEquals(underAveraged.size(), 3);
+  }
+
+  @Test
+  public void testGetUnderAveragedDurationDateBetweenDates(){
+    System.out.println("--------Test Get Under Averaged Duration Date Between Dates Successful--------");
+    given(userRepository.findById(7111625591464479902L)).willReturn(Optional.of(user2));
+    List<Date> underAveraged = userService.getUnderAveragedDurationDateBetweenDates(7111625591464479902L, 100.0, first, sixth);
+    System.out.println(underAveraged);
+    assertEquals(underAveraged.size(), 3);
+  }
+
+  @Test
+  public void testGetUserByUserName(){
+    System.out.println("--------Test Get User By UserName Successful--------");
+    given(userRepository.findByUserName("Alex")).willReturn(Optional.of(user1));
+    User returnedUser = userService.getUserByUserName("Alex");
+    System.out.println(returnedUser);
+    assertThat(returnedUser).isNotNull();
+  }
+
+  @Test
+  public void testGetUserByUserNameException() {
+    System.out.println("--------Test Get User By UserName Exception--------");
+    ResourceNotFoundException e = assertThrows(ResourceNotFoundException.class, () -> userService.getUserByUserName("na"));
+    assertEquals("Record not found with userName: na", e.getMessage());
+  }
+
+  @Test
+  public void testGetUserIdByUserName(){
+    System.out.println("--------Test Get UserId By UserName Successful--------");
+    given(userRepository.findByUserName("Alex")).willReturn(Optional.of(user1));
+    Long returnedUser = userService.getUserIdByUserName("Alex");
+    System.out.println(returnedUser);
+    assertThat(returnedUser).isNotNull();
+  }
+
+  @Test
+  public void testGetUserIdByUserNameException() {
+    System.out.println("--------Test Get UserId By UserName Exception--------");
+    ResourceNotFoundException e = assertThrows(ResourceNotFoundException.class, () -> userService.getUserIdByUserName("na"));
+    assertEquals("Record not found with userName: na", e.getMessage());
+  }
+
+  @Test
+  public void testGetWeightByUserName(){
+    System.out.println("--------Test Get Weight By UserName Successful--------");
+    given(userRepository.findByUserName("Alex")).willReturn(Optional.of(user1));
+    Double returnedUser = userService.getWeightByUserName("Alex");
+    System.out.println(returnedUser);
+    assertThat(returnedUser).isNotNull();
+  }
+
+  @Test
+  public void testGetWeightByUserNameException() {
+    System.out.println("--------Test Get Weight By UserName Exception--------");
+    ResourceNotFoundException e = assertThrows(ResourceNotFoundException.class, () -> userService.getWeightByUserName("na"));
+    assertEquals("Record not found with userName: na", e.getMessage());
+  }
+
+  @Test
+  public void testGetAllExerciseByUserName(){
+    System.out.println("--------Test Get All Exercise By UserName Successful--------");
+    given(userRepository.findByUserName("Steward")).willReturn(Optional.of(user2));
+    List<Exercise> exercises = userService.getAllExerciseByUserName("Steward");
+    for (Exercise e : exercises) {
+      System.out.println(e);
+    }
+    assertEquals(exercises.size(), 5);
+    assertEquals(exercises.get(0).getExerciseName(), "running");
+    assertEquals(exercises.get(1).getExerciseName(), "walking");
+    assertEquals(exercises.get(2).getExerciseName(), "cycling");
+    assertEquals(exercises.get(3).getExerciseName(), "walking");
+    assertEquals(exercises.get(4).getExerciseName(), "kayaking");
+  }
+
+  @Test
+  public void testGetAllExerciseByUserNameException() {
+    System.out.println("--------Test Get All Exercise By UserName Exception--------");
+    ResourceNotFoundException e = assertThrows(ResourceNotFoundException.class, () -> userService.getAllExerciseByUserName("na"));
+    assertEquals("Record not found with userName: na", e.getMessage());
+  }
+
+  @Test
+  public void testCalculateCalories(){
+    System.out.println("--------Test Calculate Calories--------");
+    Double calories = userService.calculateCalories(90.0, "running", 100.0);
+    Double calories1 = userService.calculateCalories(60.0, "cycling", 60.0);
+    Double calories2 = userService.calculateCalories(70.0, "kayaking", 30.0);
+    assertEquals(calories, 1811.25);
+    assertEquals(calories1, 504.0);
+    assertEquals(calories2, 459.375);
+  }
+
+  @Test
+  public void testUpdatePassword(){
+    System.out.println("--------Test Update Password Successful--------");
+    given(userRepository.findById(7605779767761850010L)).willReturn(Optional.of(user1));
+    userService.getUserByUserId(7605779767761850010L).setPassword("password");
+    String password = userService.getUserByUserId(7605779767761850010L).getPassword();
+    System.out.println(password);
+    assertEquals(password, "password");
+  }
+
+
 }

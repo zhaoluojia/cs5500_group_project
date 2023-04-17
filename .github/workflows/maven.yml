@@ -33,7 +33,7 @@ jobs:
       uses: 'actions/upload-artifact@v2'
       with:
           name: jacoco-report
-          path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+          path: ${{ github.workspace }}/ExerciseManager/target/site/jacoco/jacoco.xml
           
     - name: Add coverage to PR
       id: jacoco

@@ -26,7 +26,7 @@ jobs:
     
     - name: Generate Coverage Report
       run: |
-        mvn --f ../exerciseManager/pom.xml
+        mvn --f .../exerciseManager/pom.xml
       
       
     - name: Code Coverage

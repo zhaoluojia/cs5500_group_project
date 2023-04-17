@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const USER_API_BASE_URL = "https://exercisemanager.net:443/api/users/Alice/userId";
+const USER_API_BASE_URL = "http://44.239.243.104:8080/api/users";
+// const USER_API_BASE_URL = "http://exercisemanager.net:8080/api/users/Alice/userId";
 // const USER_API_BASE_URL = "http://localhost:8080/api/users";
 
-class UserService {
+class UserService {:
 
   async createExercise(id, exerciseName, date, duration){
     return await axios.post(`${USER_API_BASE_URL}/${id}/exerciseList?exerciseName=${exerciseName}&date=${date}&duration=${duration}`);

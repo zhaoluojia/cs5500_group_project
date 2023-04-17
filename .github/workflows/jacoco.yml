@@ -24,7 +24,7 @@ jobs:
         java-version: '17'
         
     - name: Build with Maven
-      run: mvn --f ExerciseManager 
+      run: mvn --f ExerciseManager test
       
     - name: Generate Jacoco badge
       id: jacoco

@@ -19,47 +19,47 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn --f ExerciseManager --batch-mode --update-snapshots verify
+#     - name: Build with Maven
+#       run: mvn --f ExerciseManager --batch-mode --update-snapshots verify
       
       
     
-#     - name: Generate Coverage Report
-#       run: |
-#         mvn --f .../exerciseManager/pom.xml
+    - name: Generate Coverage Report
+      run: |
+        mvn --f ExerciseManager/pom.xml
       
       
-#     - name: Code Coverage
-#       uses: 'actions/upload-artifact@v2'
-#       with:
-#           name: jacoco-report
-#           path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+    - name: Code Coverage
+      uses: 'actions/upload-artifact@v2'
+      with:
+          name: jacoco-report
+          path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
           
-#     - name: Add coverage to PR
-#       id: jacoco
-#       uses: madrapps/jacoco-report@v1.2
-#       with:
-#         paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
-#         token: ${{ secrets.GITHUB_TOKEN }}
-#         min-coverage-overall: 70
-#         min-coverage-changed-files: 70
-#         title: Code Coverage
+    - name: Add coverage to PR
+      id: jacoco
+      uses: madrapps/jacoco-report@v1.2
+      with:
+        paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
+        min-coverage-overall: 70
+        min-coverage-changed-files: 70
+        title: Code Coverage
         
-#     - name: Save Coverage To Environment Variable
-#       run: |
-#         echo "TOTAL_COVERAGE=${{ steps.jacoco.outputs.coverage-overall }}" >> $GITHUB_ENV
-#         echo "CHANGED_FILES_COVERAGE=${{ steps.jacoco.outputs.coverage-changed-files }}" >> $GITHUB_ENV
+    - name: Save Coverage To Environment Variable
+      run: |
+        echo "TOTAL_COVERAGE=${{ steps.jacoco.outputs.coverage-overall }}" >> $GITHUB_ENV
+        echo "CHANGED_FILES_COVERAGE=${{ steps.jacoco.outputs.coverage-changed-files }}" >> $GITHUB_ENV
         
-#     - name: Print & Check Coverage Info
-#       run: |
-#         import os
-#         import sys
-#         print("Total Coverage: " + str(os.environ["TOTAL_COVERAGE"]))
-#         print("Changed Files Coverage: " + str(os.environ["CHANGED_FILES_COVERAGE"]))
-#         if float(os.environ["TOTAL_COVERAGE"]) < 70 or float(os.environ["CHANGED_FILES_COVERAGE"]) < 70:
-#           print("Insufficient Coverage!")
-#           sys.exit(-1) # Cause Status Check Failure due to noncompliant coverage
-#         sys.exit(0)
-#       shell: python
+    - name: Print & Check Coverage Info
+      run: |
+        import os
+        import sys
+        print("Total Coverage: " + str(os.environ["TOTAL_COVERAGE"]))
+        print("Changed Files Coverage: " + str(os.environ["CHANGED_FILES_COVERAGE"]))
+        if float(os.environ["TOTAL_COVERAGE"]) < 70 or float(os.environ["CHANGED_FILES_COVERAGE"]) < 70:
+          print("Insufficient Coverage!")
+          sys.exit(-1) # Cause Status Check Failure due to noncompliant coverage
+        sys.exit(0)
+      shell: python
 
      

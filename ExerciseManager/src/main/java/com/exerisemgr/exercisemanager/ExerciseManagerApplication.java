@@ -27,7 +27,7 @@ public class ExerciseManagerApplication{
                     registry.addMapping("/**")
                       .allowedOrigins("http://44.239.243.104:3000")
 //                        .allowedOrigins("https://main--idyllic-sundae-dcf08c.netlify.app")
-//                        .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins("http://localhost:3000")
                       .allowedMethods("GET", "PUT", "POST", "DELETE");
                 }
             };

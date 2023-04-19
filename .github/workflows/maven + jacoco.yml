@@ -41,7 +41,7 @@ jobs:
       with:
         paths: ${{ github.workspace }}/ExerciseManager/target/site/jacoco/jacoco.xml
         token: ${{ secrets.GITHUB_TOKEN }}
-        min-coverage-overall: 70
+        min-coverage-overall: 75
         title: Code Coverage
         
     - name: Save Coverage To Environment Variable
@@ -53,7 +53,7 @@ jobs:
         import os
         import sys
         print("Total Coverage: " + str(os.environ["TOTAL_COVERAGE"]))
-        if float(os.environ["TOTAL_COVERAGE"]) < 70:
+        if float(os.environ["TOTAL_COVERAGE"]) < 75:
           print("Insufficient Coverage!")
           sys.exit(-1) # Cause Status Check Failure due to noncompliant coverage
         sys.exit(0)

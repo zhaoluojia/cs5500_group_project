@@ -9,6 +9,7 @@ import com.exerisemgr.exercisemanager.exception.ResourceNotFoundException;
 import com.exerisemgr.exercisemanager.model.CaloriesGoal;
 import com.exerisemgr.exercisemanager.model.DurationGoal;
 import com.exerisemgr.exercisemanager.model.Exercise;
+import com.exerisemgr.exercisemanager.model.Goal;
 import com.exerisemgr.exercisemanager.model.User;
 import com.exerisemgr.exercisemanager.repository.UserRepository;
 import com.exerisemgr.exercisemanager.service.UserServiceImpl;
@@ -39,6 +40,11 @@ public class UserServiceTests {
 
   private User user1;
   private User user2;
+  private User userModel;
+  private Exercise exerciseModel;
+  private DurationGoal durationGoalModel;
+  private CaloriesGoal caloriesGoalModel;
+  private Goal goalModel;
   private Date startDate;
   private Date endDate;
   private Date first;
@@ -56,6 +62,12 @@ public class UserServiceTests {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     user1 = new User("Alex", "password1", 88.3);
     user2 = new User("Steward", "password2", 60.2);
+    userModel = new User();
+    userModel.setUserName("Allen");
+    userModel.setId(1234567l);
+
+
+
     startDate = sdf.parse("2022-02-15");
     endDate = sdf.parse("2022-03-15");
     first = sdf.parse("2022-02-15");
@@ -92,7 +104,27 @@ public class UserServiceTests {
     user2.getExerciseList().add(e3);
     user2.getExerciseList().add(e4);
     user2.getExerciseList().add(e5);
+
+    List<Exercise> list = new ArrayList<>();
+    list.add(e1);
+    userModel.setExerciseList(list);
+    userModel.addExercise(e2);
+
+    exerciseModel = new Exercise();
+    exerciseModel.setId(1234567l);
+    exerciseModel.setExerciseName("running");
+    exerciseModel.setCalories(300.0);
+    exerciseModel.setDuration(60.0);
+    exerciseModel.setDate(startDate);
+
+    DurationGoal durationGoalModel = new DurationGoal();
+    durationGoalModel.setDurationGoal(300.0);
+
+    CaloriesGoal caloriesGoalModel = new CaloriesGoal();
+    caloriesGoalModel.setCaloriesGoal(1000.0);
+
   }
+
 
   @Test
   public void testCreateUser() {

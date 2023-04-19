@@ -4,8 +4,8 @@ from datetime import datetime
 
 def main():
 
-    f = open(
-        '/Users/anita/Desktop/NEU/Spring2023/CS5500/cs5500_group_project/storyline.json')
+    f = open('storyline.json')
+    # '/Users/anita/Desktop/NEU/Spring2023/CS5500/cs5500_group_project/storyline.json'
     # return json object as dictionary
     data = json.load(f)
     # create exercise dict

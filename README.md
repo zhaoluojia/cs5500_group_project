@@ -1,4 +1,4 @@
-# ExerciseManager (cs5500_group_project)
+# ExerciseManager
 
 This application is for exercise lovers who want to record the exercise activities.
 

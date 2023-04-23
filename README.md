@@ -58,6 +58,25 @@ This is the one to test if you can input the data into MongoDB.
 #### UserServiceTests.java        
 This is the one to do the unit testing of our business logic in UserService.
 
+### Frontend
+
+■ src
+
+#### components
+Contains reusable UI components including HTML markup, CSS styles, and JavaScript functionality.
+
+#### services
+UserService class encapsulates the logic for interacting with the backend API (UserController).
+
+#### vendors
+Includes a Bootswatch theme for Bootstrap to create responsive web pages.
+
+#### App.js
+Serves as the entry point for the application. It is the main component that contains all other components and is responsible for rendering the user interface.
+
+#### index.js
+This is the first file that gets executed when the application is started, and it is responsible for rendering the root component of the application onto the DOM.
+
 ## Installation
 
 ```bash

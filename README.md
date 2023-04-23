@@ -1,12 +1,16 @@
 # ExerciseManager
 
 This application is for exercise lovers who want to record the exercise activities.
+<img src="https://drive.google.com/uc?id=15bs4ZmOWJDGw6jImbGM74w_j0fN6yL9_"
+     alt="sample image"
+     style="display: block; margin-right: auto; margin-left: auto; width: 70%;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" />
 
 With this web app, users who want to manage their exercise plans can:
 
 1. Record each exercise they do, and the calories burnt during the exercise will be calculated.
 
-2. Set the goal of the duration of exercise/calories to burn in a period,
+2. Set the goal of the duration of exercise/calories to burn in a period.
 
 3. Track the progress to reach goal with graph representations, and get advised due to their actual exercise activities records.
 
@@ -72,7 +76,7 @@ UserService class encapsulates the logic for interacting with the backend API (U
 Includes a Bootswatch theme for Bootstrap to create responsive web pages.
 
 #### App.js
-Serves as the entry point for the application. It is the main component that contains all other components and is responsible for rendering the user interface.
+It serves as the entry point for the application. It is the main component that contains all other components and is responsible for rendering the user interface.
 
 #### index.js
 This is the first file that gets executed when the application is started, and it is responsible for rendering the root component of the application onto the DOM.
@@ -82,4 +86,17 @@ This is the first file that gets executed when the application is started, and i
 ```bash
 code for instruction can be written here
 ```
+## Code/Test Metrics
+
+#### [Jacoco](https://www.eclemma.org/jacoco/)
+Jacoco is used to identify untested code and improve the quality of the tests.
+
+#### [Postman](https://www.postman.com/)
+Postman is used to create automated tests that can check that our API endpoints are returning the expected data, and that they are responding within an acceptable timeframe. 
+
+#### [CodeMR](https://www.codemr.co.uk/)
+CodeMR is used to identify potential issues in our codebase and to ensure that our code is of a high quality and is less likely to contain bugs or other issues.
+
+#### [GitHub Actions](https://github.com/features/actions)
+We use GitHub Actions to build the CI pipeline, which automates the building, testing, and deployment of our application. It helps us improve the reliability of the application and and ensure that our code is always in a deployable state.
 

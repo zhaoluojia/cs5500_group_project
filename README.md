@@ -82,10 +82,10 @@ It serves as the entry point for the application. It is the main component that 
 This is the first file that gets executed when the application is started, and it is responsible for rendering the root component of the application onto the DOM.
 
 ## Installation
-Install with [npm](https://www.npmjs.com):
+■ Install [Maven](https://maven.apache.org/install.html)
+■ Install with [npm](https://www.npmjs.com):
 ```bash
 $ npm install --save npm-install-global
-$ 
 ```
 ## How to run the APP
 ■ Pull the code from the remote github repository to your target folder

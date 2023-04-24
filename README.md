@@ -85,6 +85,7 @@ This is the first file that gets executed when the application is started, and i
 Install with [npm](https://www.npmjs.com):
 ```bash
 $ npm install --save npm-install-global
+$ 
 ```
 ## How to run the APP
 ■ Pull the code from the remote github repository to your target folder
@@ -93,7 +94,8 @@ $ git clone https://github.com/zhaoluojia/cs5500_group_project.git
 ```
 ■ Backend
 ```bash
-$ java Spring2023/CS5500/cs5500_group_project/ExerciseManager/src/main/java/com/exerisemgr/exercisemanager
+$ cd ExerciseManager
+$ mvn spring-boot:run
 ```
 ■ Frontend
 ```bash

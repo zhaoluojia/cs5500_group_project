@@ -87,11 +87,15 @@ Install with npm:
 $ npm install --save npm-install-global
 ```
 ## How to run the APP
-backend:
+■ Pull the code from the remote github repository to your target folder
+```bash
+$ git clone 
+```
+■ Backend
 ```bash
 $ java /Users/anita/Desktop/NEU/Spring2023/CS5500/cs5500_group_project/ExerciseManager/src/main/java/com/exerisemgr/exercisemanager
 ```
-frontend:
+■ Frontend
 ```bash
 $ npm start
 ```

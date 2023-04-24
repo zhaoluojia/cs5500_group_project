@@ -119,7 +119,7 @@ We use GitHub Actions to build the CI pipeline, which automates the building, te
 
 ## Known problems
 ■ Deployment Issue
-The current URL is for local use. If you want to run the application deployed to the cloud, please change the URL to "http://44.239.243.104:3000" in react-frontend > src > services > UserService.js. As AWS Lab has a time limit for use (four hours), users might not be able to visit the website when it expires. As a result, we are currently using a local URL in the code.
+The current URL is for local use. If you want to run the application deployed to the cloud, please change the URL to `http://44.239.243.104:3000` in `react-frontend > src > services > UserService.js`. As AWS Lab has a time limit for use (four hours), users might not be able to visit the website when it expires. As a result, we are currently using a local URL in the code.
 
 ```bash
 const USER_API_BASE_URL = "http://44.239.243.104:8080/api/users"

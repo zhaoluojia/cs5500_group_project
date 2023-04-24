@@ -118,4 +118,13 @@ CodeMR is used to identify potential issues in our codebase and to ensure that o
 We use GitHub Actions to build the CI pipeline, which automates the building, testing, and deployment of our application. It helps us improve the reliability of the application and and ensure that our code is always in a deployable state.
 
 ## Known problems
+■ Deployment Issue
+The current URL is for local use. If you want to run the application deployed to the cloud, please change the URL to "http://44.239.243.104:3000" in react-frontend > src > services > UserService.js. As AWS Lab has a time limit for use (four hours), users might not be able to visit the website when it expires. As a result, we are currently using a local URL in the code.
+
+```bash
+const USER_API_BASE_URL = "http://44.239.243.104:8080/api/users"
+```
+
+■ CI Pipeline Issue:
+We set the testing total coverage to be at least 75  but not higher because we don’t need the testing score for the Controller, main function, and some extended functions. Firstly, We tested the Controller by Postman before we push to Github, hence we did not do the unit test for the Controller. Second, ExerciseManagerApplication.java  is the main entry to run the application so it is not necessary to do the unit test. Lastly, Some methods in Models are extended functions for future use such as some getters and setters. Thus, at this point, at least 75 is sufficient for our unit test part (Jacoco).
 

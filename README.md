@@ -92,12 +92,12 @@ $
 ```bash
 $ git clone https://github.com/zhaoluojia/cs5500_group_project.git
 ```
-■ Backend
+■ Enter the script below to run the backend
 ```bash
 $ cd ExerciseManager
 $ mvn spring-boot:run
 ```
-■ Frontend
+■ Enter the script below to run the frontend
 ```bash
 $ cd react-frontend
 $ npm start

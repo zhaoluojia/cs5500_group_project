@@ -82,7 +82,7 @@ It serves as the entry point for the application. It is the main component that 
 This is the first file that gets executed when the application is started, and it is responsible for rendering the root component of the application onto the DOM.
 
 ## Installation
-Install with npm:
+Install with [npm](https://www.npmjs.com):
 ```bash
 $ npm install --save npm-install-global
 ```
@@ -112,4 +112,6 @@ CodeMR is used to identify potential issues in our codebase and to ensure that o
 
 #### [GitHub Actions](https://github.com/features/actions)
 We use GitHub Actions to build the CI pipeline, which automates the building, testing, and deployment of our application. It helps us improve the reliability of the application and and ensure that our code is always in a deployable state.
+
+## Known problems
 

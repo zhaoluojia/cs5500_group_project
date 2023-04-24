@@ -97,6 +97,7 @@ $ java Spring2023/CS5500/cs5500_group_project/ExerciseManager/src/main/java/com/
 ```
 ■ Frontend
 ```bash
+$ cd react-frontend
 $ npm start
 ```
 ## Code/Test Metrics

@@ -89,7 +89,7 @@ $ npm install --save npm-install-global
 ## How to run the APP
 ■ Pull the code from the remote github repository to your target folder
 ```bash
-$ git clone 
+$ git clone https://github.com/zhaoluojia/cs5500_group_project.git
 ```
 ■ Backend
 ```bash

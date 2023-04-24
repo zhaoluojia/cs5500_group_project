@@ -93,7 +93,7 @@ $ git clone https://github.com/zhaoluojia/cs5500_group_project.git
 ```
 ■ Backend
 ```bash
-$ java /Users/anita/Desktop/NEU/Spring2023/CS5500/cs5500_group_project/ExerciseManager/src/main/java/com/exerisemgr/exercisemanager
+$ java Spring2023/CS5500/cs5500_group_project/ExerciseManager/src/main/java/com/exerisemgr/exercisemanager
 ```
 ■ Frontend
 ```bash

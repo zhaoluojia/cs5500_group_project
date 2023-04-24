@@ -82,9 +82,9 @@ It serves as the entry point for the application. It is the main component that 
 This is the first file that gets executed when the application is started, and it is responsible for rendering the root component of the application onto the DOM.
 
 ## Installation
-
+Install with npm:
 ```bash
-code for instruction can be written here
+$ npm install --save npm-install-global
 ```
 ## Code/Test Metrics
 

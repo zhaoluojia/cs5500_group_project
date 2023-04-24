@@ -86,7 +86,7 @@ This is the first file that gets executed when the application is started, and i
 
 ■ Install [npm](https://www.npmjs.com):
 ```bash
-$ npm install --save npm-install-global
+$ npm install -g npm
 ```
 ## How to run the APP
 ■ Pull the code from the remote github repository to your target folder

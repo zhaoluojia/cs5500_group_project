@@ -86,6 +86,15 @@ Install with npm:
 ```bash
 $ npm install --save npm-install-global
 ```
+## How to run the APP
+backend:
+```bash
+$ java /Users/anita/Desktop/NEU/Spring2023/CS5500/cs5500_group_project/ExerciseManager/src/main/java/com/exerisemgr/exercisemanager
+```
+frontend:
+```bash
+$ npm start
+```
 ## Code/Test Metrics
 
 #### [Jacoco](https://www.eclemma.org/jacoco/)

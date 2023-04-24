@@ -84,7 +84,7 @@ This is the first file that gets executed when the application is started, and i
 ## Installation
 ■ Install [Maven](https://maven.apache.org/install.html)
 
-■ Install with [npm](https://www.npmjs.com):
+■ Install [npm](https://www.npmjs.com):
 ```bash
 $ npm install --save npm-install-global
 ```

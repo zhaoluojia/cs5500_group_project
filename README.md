@@ -95,10 +95,13 @@ $ npm install -g npm
 ```bash
 $ git clone https://github.com/zhaoluojia/cs5500_group_project.git
 ```
+■ Build the project
+$ mvn clean install
+
 ■ Enter the script below to run the backend
 ```bash
 $ cd ExerciseManager
-$ mvn spring-boot:run
+$ mvn spring-boot:run or by running ExerciseManagerApplication.java
 ```
 ■ Enter the script below to run the frontend
 ```bash

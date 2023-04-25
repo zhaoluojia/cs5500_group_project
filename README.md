@@ -96,8 +96,9 @@ $ npm install -g npm
 $ git clone https://github.com/zhaoluojia/cs5500_group_project.git
 ```
 ■ Build the project
+```bash
 $ mvn clean install
-
+```
 ■ Enter the script below to run the backend
 ```bash
 $ cd ExerciseManager

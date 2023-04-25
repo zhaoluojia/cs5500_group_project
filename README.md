@@ -82,6 +82,8 @@ It serves as the entry point for the application. It is the main component that 
 This is the first file that gets executed when the application is started, and it is responsible for rendering the root component of the application onto the DOM.
 
 ## Installation
+■ Install [JDK version 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+
 ■ Install [Maven](https://maven.apache.org/install.html)
 
 ■ Install [npm](https://www.npmjs.com)
@@ -124,7 +126,4 @@ The current URL is for local use. If you want to run the application deployed to
 ```bash
 const USER_API_BASE_URL = "http://44.239.243.104:8080/api/users"
 ```
-
-#### CI Pipeline Issue
-We set the testing total coverage to be at least 75  but not higher because we don’t need the testing score for the Controller, main function, and some extended functions. Firstly, We tested the Controller by Postman before we push to Github, hence we did not do the unit test for the Controller. Second, ExerciseManagerApplication.java  is the main entry to run the application so it is not necessary to do the unit test. Lastly, Some methods in Models are extended functions for future use such as some getters and setters. Thus, at this point, a 75 score is sufficient for our unit test part (Jacoco).
 

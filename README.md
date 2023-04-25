@@ -43,7 +43,7 @@ The core of our code are inside ExerciseManager (backend) and react-frontend (fr
 Contains an ExerciseManagerApplication.java file that main method to execute our program.
 
 #### model
-Our Models. Contains User/Exercise/Goal objects, and CaloriesGoal/DurationGoal that extend Goal. 
+Contains User/Exercise/Goal objects, and CaloriesGoal/DurationGoal that extend Goal. 
 
 #### controller
 Class UserController contains methods to interact with the frontend to do the CRUD operations. Methods will be called by the frontend program.
